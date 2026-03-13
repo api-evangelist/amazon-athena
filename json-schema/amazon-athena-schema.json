@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.apievangelist.com/amazon-athena/query-execution",
+  "title": "Amazon Athena Query Execution",
+  "description": "Schema defining the structure of an Amazon Athena query execution resource, including query string, execution context, result configuration, work group settings, and execution status.",
+  "type": "object",
+  "required": [
+    "QueryString"
+  ],
+  "properties": {
+    "QueryExecutionId": {
+      "type": "string",
+      "description": "The unique identifier for each query execution."
+    },
+    "QueryString": {
+      "type": "string",
+      "description": "The SQL query statements which the query execution ran.",
+      "minLength": 1,
+      "maxLength": 262144
+    },
+    "StatementType": {
+      "type": "string",
+      "enum": [
+        "DDL",
+        "DML",
+        "UTILITY"
+      ],
+      "description": "The type of query statement that was run."
+    },
+    "ResultConfiguration": {
+      "$ref": "#/$defs/ResultConfiguration"
+    },
+    "QueryExecutionContext": {
+      "$ref": "#/$defs/QueryExecutionContext"
+    },
+    "Status": {
+      "$ref": "#/$defs/QueryExecutionStatus"
+    },
+    "Statistics": {
+      "$ref": "#/$defs/QueryExecutionStatistics"
+    },
+    "WorkGroup": {
+      "type": "string",
+      "description": "The name of the workgroup in which the query ran."
+    },
+    "EngineVersion": {
+      "$ref": "#/$defs/EngineVersion"
+    },
+    "ExecutionParameters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "A list of values for the parameters in a query."
+    },
+    "SubstatementType": {
+      "type": "string",
+      "description": "The kind of query statement that was run."
+    }
+  },
+  "$defs": {
+    "ResultConfiguration": {
+      "type": "object",
+      "description": "The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results.",
+      "properties": {
+        "OutputLocation": {
+          "type": "string",
+          "description": "The location in Amazon S3 where your query results are stored."
+        },
+        "EncryptionConfiguration": {
+          "type": "object",
+          "properties": {
+            "EncryptionOption": {
+              "type": "string",
+              "enum": [
+                "SSE_S3",
+                "SSE_KMS",
+                "CSE_KMS"
+              ],
+              "description": "The type of server-side encryption used."
+            },
+            "KmsKey": {
+              "type": "string",
+              "description": "The KMS key ARN or ID for SSE_KMS and CSE_KMS encryption."
+            }
+          },
+          "required": [
+            "EncryptionOption"
+          ]
+        },
+        "ExpectedBucketOwner": {
+          "type": "string",
+          "description": "The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket."
+        },
+        "AclConfiguration": {
+          "type": "object",
+          "properties": {
+            "S3AclOption": {
+              "type": "string",
+              "enum": [
+                "BUCKET_OWNER_FULL_CONTROL"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "QueryExecutionContext": {
+      "type": "object",
+      "description": "The database and data catalog context for the query execution.",
+      "properties": {
+        "Database": {
+          "type": "string",
+          "description": "The name of the database used in the query execution."
+        },
+        "Catalog": {
+          "type": "string",
+          "description": "The name of the data catalog used in the query execution."
+        }
+      }
+    },
+    "QueryExecutionStatus": {
+      "type": "object",
+      "description": "The status of a query execution.",
+      "properties": {
+        "State": {
+          "type": "string",
+          "enum": [
+            "QUEUED",
+            "RUNNING",
+            "SUCCEEDED",
+            "FAILED",
+            "CANCELLED"
+          ],
+          "description": "The state of the query execution."
+        },
+        "StateChangeReason": {
+          "type": "string",
+          "description": "Further detail about the status of the query."
+        },
+        "SubmissionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time that the query was submitted."
+        },
+        "CompletionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time that the query completed."
+        },
+        "AthenaError": {
+          "type": "object",
+          "properties": {
+            "ErrorCategory": {
+              "type": "integer"
+            },
+            "ErrorType": {
+              "type": "integer"
+            },
+            "Retryable": {
+              "type": "boolean"
+            },
+            "ErrorMessage": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "QueryExecutionStatistics": {
+      "type": "object",
+      "description": "Statistics about the query execution.",
+      "properties": {
+        "EngineExecutionTimeInMillis": {
+          "type": "integer",
+          "description": "The number of milliseconds that the query took to execute."
+        },
+        "DataScannedInBytes": {
+          "type": "integer",
+          "description": "The number of bytes in the data that was queried."
+        },
+        "DataManifestLocation": {
+          "type": "string",
+          "description": "The location and file name of a data manifest file."
+        },
+        "TotalExecutionTimeInMillis": {
+          "type": "integer"
+        },
+        "QueryQueueTimeInMillis": {
+          "type": "integer"
+        },
+        "ServicePreProcessingTimeInMillis": {
+          "type": "integer"
+        },
+        "ServiceProcessingTimeInMillis": {
+          "type": "integer"
+        },
+        "ResultReuseInformation": {
+          "type": "object",
+          "properties": {
+            "ReusedPreviousResult": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "EngineVersion": {
+      "type": "object",
+      "description": "The Athena engine version for running queries.",
+      "properties": {
+        "SelectedEngineVersion": {
+          "type": "string",
+          "description": "The engine version requested by the user."
+        },
+        "EffectiveEngineVersion": {
+          "type": "string",
+          "description": "The engine version that ran the query."
+        }
+      }
+    }
+  }
+}

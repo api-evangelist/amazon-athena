@@ -1,0 +1,195 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "athena": "https://docs.aws.amazon.com/athena/latest/APIReference/",
+    "aws": "https://aws.amazon.com/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+
+    "QueryExecution": {
+      "@id": "athena:API_QueryExecution",
+      "@context": {
+        "QueryExecutionId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "QueryString": {
+          "@id": "athena:QueryString",
+          "@type": "xsd:string"
+        },
+        "StatementType": {
+          "@id": "athena:StatementType",
+          "@type": "xsd:string"
+        },
+        "WorkGroup": {
+          "@id": "athena:WorkGroup",
+          "@type": "xsd:string"
+        },
+        "ResultConfiguration": {
+          "@id": "athena:ResultConfiguration",
+          "@type": "athena:ResultConfiguration"
+        },
+        "QueryExecutionContext": {
+          "@id": "athena:QueryExecutionContext",
+          "@type": "athena:QueryExecutionContext"
+        },
+        "Status": {
+          "@id": "athena:QueryExecutionStatus",
+          "@type": "athena:QueryExecutionStatus"
+        },
+        "Statistics": {
+          "@id": "athena:QueryExecutionStatistics",
+          "@type": "athena:QueryExecutionStatistics"
+        }
+      }
+    },
+
+    "ResultConfiguration": {
+      "@id": "athena:ResultConfiguration",
+      "@context": {
+        "OutputLocation": {
+          "@id": "athena:OutputLocation",
+          "@type": "xsd:string"
+        },
+        "EncryptionConfiguration": {
+          "@id": "athena:EncryptionConfiguration",
+          "@type": "athena:EncryptionConfiguration"
+        }
+      }
+    },
+
+    "QueryExecutionContext": {
+      "@id": "athena:QueryExecutionContext",
+      "@context": {
+        "Database": {
+          "@id": "athena:Database",
+          "@type": "xsd:string"
+        },
+        "Catalog": {
+          "@id": "athena:Catalog",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "QueryExecutionStatus": {
+      "@id": "athena:QueryExecutionStatus",
+      "@context": {
+        "State": {
+          "@id": "athena:State",
+          "@type": "xsd:string"
+        },
+        "StateChangeReason": {
+          "@id": "athena:StateChangeReason",
+          "@type": "xsd:string"
+        },
+        "SubmissionDateTime": {
+          "@id": "schema:dateCreated",
+          "@type": "xsd:dateTime"
+        },
+        "CompletionDateTime": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "QueryExecutionStatistics": {
+      "@id": "athena:QueryExecutionStatistics",
+      "@context": {
+        "EngineExecutionTimeInMillis": {
+          "@id": "athena:EngineExecutionTimeInMillis",
+          "@type": "xsd:integer"
+        },
+        "DataScannedInBytes": {
+          "@id": "athena:DataScannedInBytes",
+          "@type": "xsd:integer"
+        },
+        "TotalExecutionTimeInMillis": {
+          "@id": "athena:TotalExecutionTimeInMillis",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "NamedQuery": {
+      "@id": "athena:API_NamedQuery",
+      "@context": {
+        "Name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "Description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "Database": {
+          "@id": "athena:Database",
+          "@type": "xsd:string"
+        },
+        "QueryString": {
+          "@id": "athena:QueryString",
+          "@type": "xsd:string"
+        },
+        "NamedQueryId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "WorkGroup": {
+          "@id": "athena:WorkGroup",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "WorkGroup": {
+      "@id": "athena:API_WorkGroup",
+      "@context": {
+        "Name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "State": {
+          "@id": "athena:WorkGroupState",
+          "@type": "xsd:string"
+        },
+        "Description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "CreationTime": {
+          "@id": "schema:dateCreated",
+          "@type": "xsd:dateTime"
+        },
+        "Configuration": {
+          "@id": "athena:WorkGroupConfiguration",
+          "@type": "athena:WorkGroupConfiguration"
+        }
+      }
+    },
+
+    "DataCatalog": {
+      "@id": "athena:API_DataCatalog",
+      "@context": {
+        "Name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "Description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "Type": {
+          "@id": "athena:DataCatalogType",
+          "@type": "xsd:string"
+        },
+        "Parameters": {
+          "@id": "athena:DataCatalogParameters",
+          "@container": "@index"
+        }
+      }
+    }
+  }
+}

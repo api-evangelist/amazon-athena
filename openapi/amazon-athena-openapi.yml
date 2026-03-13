@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: Amazon Athena API
+  description: >-
+    The Amazon Athena API enables you to run interactive SQL queries against
+    data in Amazon S3. You can manage named queries, work groups, data
+    catalogs, prepared statements, and query executions programmatically.
+  version: '2017-05-18'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+  - url: https://athena.{region}.amazonaws.com
+    description: Amazon Athena regional endpoint
+    variables:
+      region:
+        default: us-east-1
+        description: AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+          - ca-central-1
+security:
+  - sigv4: []
+tags:
+  - name: Query Execution
+    description: Operations for starting, stopping, and retrieving query executions
+  - name: Named Queries
+    description: Operations for managing saved named queries
+  - name: Work Groups
+    description: Operations for managing Athena workgroups
+  - name: Data Catalogs
+    description: Operations for managing data catalogs
+  - name: Prepared Statements
+    description: Operations for managing prepared SQL statements
+paths:
+  /:
+    post:
+      operationId: StartQueryExecution
+      summary: Start a SQL query execution
+      description: Runs the SQL query statements contained in the query string.
+      tags:
+        - Query Execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartQueryExecutionInput'
+      responses:
+        '200':
+          description: Query execution started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartQueryExecutionOutput'
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
+components:
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4
+  schemas:
+    StartQueryExecutionInput:
+      type: object
+      required:
+        - QueryString
+      properties:
+        QueryString:
+          type: string
+          description: The SQL query statements to be executed
+        QueryExecutionContext:
+          type: object
+          properties:
+            Database:
+              type: string
+            Catalog:
+              type: string
+        ResultConfiguration:
+          type: object
+          properties:
+            OutputLocation:
+              type: string
+        WorkGroup:
+          type: string
+    StartQueryExecutionOutput:
+      type: object
+      properties:
+        QueryExecutionId:
+          type: string
+          description: The unique ID of the query execution

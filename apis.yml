@@ -1,14 +1,17 @@
+aid: amazon-athena
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/apis.yml
 name: Amazon Athena
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+specificationVersion: '0.19'
 description: >-
   Amazon Athena is an interactive analytics service that makes it simple to
   analyze data directly in Amazon S3 using standard SQL. Athena is serverless,
   so there is no infrastructure to manage, and you pay only for the queries
   that you run.
-image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-url: https://aws.amazon.com/athena/
-type: Index
 created: '2024-01-15'
-modified: '2026-03-13'
+modified: '2026-03-16'
 tags:
 - Analytics
 - SQL

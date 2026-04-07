@@ -42,14 +42,6 @@ security:
 tags:
   - name: Query Execution
     description: Operations for starting, stopping, and retrieving query executions
-  - name: Named Queries
-    description: Operations for managing saved named queries
-  - name: Work Groups
-    description: Operations for managing Athena workgroups
-  - name: Data Catalogs
-    description: Operations for managing data catalogs
-  - name: Prepared Statements
-    description: Operations for managing prepared SQL statements
 paths:
   /:
     post:

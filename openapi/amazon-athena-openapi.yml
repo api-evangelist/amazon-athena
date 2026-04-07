@@ -54,7 +54,7 @@ paths:
   /:
     post:
       operationId: StartQueryExecution
-      summary: Start a SQL query execution
+      summary: Amazon Athena Start a SQL query execution
       description: Runs the SQL query statements contained in the query string.
       tags:
         - Query Execution

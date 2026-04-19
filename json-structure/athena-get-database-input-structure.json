@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-get-database-input-structure.json",
+  "title": "GetDatabaseInput",
+  "description": "JSON Structure for the Amazon Athena GetDatabaseInput object.",
+  "type": "object",
+  "properties": {}
+}

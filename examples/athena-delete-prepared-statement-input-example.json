@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-delete-prepared-statement-input-schema.json",
+  "title": "DeletePreparedStatementInput Example",
+  "description": "An example of the Amazon Athena DeletePreparedStatementInput object."
+}

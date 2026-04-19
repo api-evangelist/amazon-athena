@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-start-query-execution-output-schema.json",
+  "title": "StartQueryExecutionOutput Example",
+  "description": "An example of the Amazon Athena StartQueryExecutionOutput object."
+}

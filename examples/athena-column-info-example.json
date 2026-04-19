@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-column-info-schema.json",
+  "title": "ColumnInfo Example",
+  "description": "An example of the Amazon Athena ColumnInfo object."
+}

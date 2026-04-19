@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-get-prepared-statement-output-schema.json",
+  "title": "GetPreparedStatementOutput Example",
+  "description": "An example of the Amazon Athena GetPreparedStatementOutput object."
+}

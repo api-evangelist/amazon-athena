@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-column-info-structure.json",
+  "title": "ColumnInfo",
+  "description": "JSON Structure for the Amazon Athena ColumnInfo object.",
+  "type": "object",
+  "properties": {}
+}

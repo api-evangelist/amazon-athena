@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-start-query-execution-output-structure.json",
+  "title": "StartQueryExecutionOutput",
+  "description": "JSON Structure for the Amazon Athena StartQueryExecutionOutput object.",
+  "type": "object",
+  "properties": {}
+}

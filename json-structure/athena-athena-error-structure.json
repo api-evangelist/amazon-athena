@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-athena-error-structure.json",
+  "title": "AthenaError",
+  "description": "JSON Structure for the Amazon Athena AthenaError object.",
+  "type": "object",
+  "properties": {}
+}

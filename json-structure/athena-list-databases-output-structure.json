@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-list-databases-output-structure.json",
+  "title": "ListDatabasesOutput",
+  "description": "JSON Structure for the Amazon Athena ListDatabasesOutput object.",
+  "type": "object",
+  "properties": {}
+}

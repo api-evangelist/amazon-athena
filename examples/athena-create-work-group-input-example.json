@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-create-work-group-input-schema.json",
+  "title": "CreateWorkGroupInput Example",
+  "description": "An example of the Amazon Athena CreateWorkGroupInput object."
+}

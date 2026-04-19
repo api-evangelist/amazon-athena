@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-data-catalog-summary-structure.json",
+  "title": "DataCatalogSummary",
+  "description": "JSON Structure for the Amazon Athena DataCatalogSummary object.",
+  "type": "object",
+  "properties": {}
+}

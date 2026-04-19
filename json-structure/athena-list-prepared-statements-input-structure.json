@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-list-prepared-statements-input-structure.json",
+  "title": "ListPreparedStatementsInput",
+  "description": "JSON Structure for the Amazon Athena ListPreparedStatementsInput object.",
+  "type": "object",
+  "properties": {}
+}

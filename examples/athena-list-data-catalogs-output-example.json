@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-list-data-catalogs-output-schema.json",
+  "title": "ListDataCatalogsOutput Example",
+  "description": "An example of the Amazon Athena ListDataCatalogsOutput object."
+}

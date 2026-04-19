@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-list-work-groups-output-structure.json",
+  "title": "ListWorkGroupsOutput",
+  "description": "JSON Structure for the Amazon Athena ListWorkGroupsOutput object.",
+  "type": "object",
+  "properties": {}
+}

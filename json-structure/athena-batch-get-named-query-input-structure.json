@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-batch-get-named-query-input-structure.json",
+  "title": "BatchGetNamedQueryInput",
+  "description": "JSON Structure for the Amazon Athena BatchGetNamedQueryInput object.",
+  "type": "object",
+  "properties": {}
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-batch-get-query-execution-input-structure.json",
+  "title": "BatchGetQueryExecutionInput",
+  "description": "JSON Structure for the Amazon Athena BatchGetQueryExecutionInput object.",
+  "type": "object",
+  "properties": {}
+}

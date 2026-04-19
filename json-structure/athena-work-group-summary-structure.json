@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-work-group-summary-structure.json",
+  "title": "WorkGroupSummary",
+  "description": "JSON Structure for the Amazon Athena WorkGroupSummary object.",
+  "type": "object",
+  "properties": {}
+}

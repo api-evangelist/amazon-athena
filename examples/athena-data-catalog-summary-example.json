@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-data-catalog-summary-schema.json",
+  "title": "DataCatalogSummary Example",
+  "description": "An example of the Amazon Athena DataCatalogSummary object."
+}

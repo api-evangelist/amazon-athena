@@ -1,0 +1,189 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: SQL Analytics Workflow
+  description: Workflow capability for running and managing SQL analytics queries with Amazon Athena including query execution, named queries, work groups, and data catalog management.
+  tags:
+    - Amazon Athena
+    - SQL
+    - Analytics
+    - Serverless
+    - AWS
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+imports:
+  - namespace: athena
+    from: shared/athena-api.yaml
+
+capability:
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: sql-analytics-rest
+      resources:
+        - path: /v1/queries
+          name: queries
+          description: SQL query management
+          operations:
+            - method: POST
+              name: start-query-execution
+              description: Start a SQL query execution
+              call: "athena.start-query-execution"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: list-query-executions
+              description: List query executions
+              call: "athena.list-query-executions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/named-queries
+          name: named-queries
+          description: Named query management
+          operations:
+            - method: POST
+              name: create-named-query
+              description: Create a named query
+              call: "athena.create-named-query"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: list-named-queries
+              description: List named queries
+              call: "athena.list-named-queries"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: sql-analytics-mcp
+      transport: http
+      tools:
+        - name: start-query-execution
+          description: Run a SQL query against S3 data using Amazon Athena for serverless analytics.
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "athena.start-query-execution"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-query-execution
+          description: Check the status of a running or completed Athena query execution.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "athena.get-query-execution"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-query-results
+          description: Download the results of a completed Athena SQL query.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "athena.get-query-results"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-query-executions
+          description: List recent query executions in an Athena workgroup.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "athena.list-query-executions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-named-query
+          description: Save a SQL query as a named query for reuse in Athena.
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "athena.create-named-query"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-named-queries
+          description: List saved named queries available in an Athena workgroup.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "athena.list-named-queries"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-work-groups
+          description: List Athena workgroups to understand available query isolation environments.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "athena.list-work-groups"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-data-catalogs
+          description: List data catalogs registered with Athena to discover available data sources.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "athena.list-data-catalogs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-databases
+          description: List databases in an Athena data catalog to explore available schemas.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "athena.list-databases"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-table-metadata
+          description: List tables in an Athena database to understand available data.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "athena.list-table-metadata"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+personas:
+  - name: Data Analyst
+    description: Runs SQL queries against S3 data using Athena for analytics and reporting.
+    tools:
+      - start-query-execution
+      - get-query-execution
+      - get-query-results
+      - list-query-executions
+      - create-named-query
+      - list-named-queries
+      - list-databases
+      - list-table-metadata
+
+  - name: Data Engineer
+    description: Manages Athena infrastructure including workgroups, data catalogs, and prepared statements.
+    tools:
+      - list-work-groups
+      - list-data-catalogs
+      - list-databases
+      - list-table-metadata
+      - list-named-queries
+      - list-query-executions

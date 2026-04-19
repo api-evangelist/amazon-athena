@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-table-metadata-structure.json",
+  "title": "TableMetadata",
+  "description": "JSON Structure for the Amazon Athena TableMetadata object.",
+  "type": "object",
+  "properties": {}
+}

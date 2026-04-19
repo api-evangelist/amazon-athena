@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-create-named-query-input-structure.json",
+  "title": "CreateNamedQueryInput",
+  "description": "JSON Structure for the Amazon Athena CreateNamedQueryInput object.",
+  "type": "object",
+  "properties": {}
+}

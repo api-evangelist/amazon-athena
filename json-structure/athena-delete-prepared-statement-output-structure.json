@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-delete-prepared-statement-output-structure.json",
+  "title": "DeletePreparedStatementOutput",
+  "description": "JSON Structure for the Amazon Athena DeletePreparedStatementOutput object.",
+  "type": "object",
+  "properties": {}
+}

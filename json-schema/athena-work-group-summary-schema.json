@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-summary-schema.json",
+  "title": "WorkGroupSummary",
+  "description": "JSON Schema for the Amazon Athena WorkGroupSummary object.",
+  "type": "object",
+  "properties": {}
+}

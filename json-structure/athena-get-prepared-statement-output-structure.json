@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-get-prepared-statement-output-structure.json",
+  "title": "GetPreparedStatementOutput",
+  "description": "JSON Structure for the Amazon Athena GetPreparedStatementOutput object.",
+  "type": "object",
+  "properties": {}
+}

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-unprocessed-named-query-id-schema.json",
+  "title": "UnprocessedNamedQueryId Example",
+  "description": "An example of the Amazon Athena UnprocessedNamedQueryId object."
+}

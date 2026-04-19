@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-query-runtime-statistics-timeline-structure.json",
+  "title": "QueryRuntimeStatisticsTimeline",
+  "description": "JSON Structure for the Amazon Athena QueryRuntimeStatisticsTimeline object.",
+  "type": "object",
+  "properties": {}
+}

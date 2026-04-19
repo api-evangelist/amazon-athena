@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-prepared-statement-summary-schema.json",
+  "title": "PreparedStatementSummary",
+  "description": "JSON Schema for the Amazon Athena PreparedStatementSummary object.",
+  "type": "object",
+  "properties": {}
+}

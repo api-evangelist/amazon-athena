@@ -1,0 +1,325 @@
+vocabulary:
+  label: Amazon Athena Vocabulary
+  description: Core terms, actions, and workflows for the Amazon Athena serverless SQL analytics service.
+  tags:
+    - Amazon Athena
+    - SQL
+    - Analytics
+    - Serverless
+    - AWS
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+resources:
+  - name: QueryExecution
+    description: A record of a SQL query that was run or is currently running in Athena, including status, statistics, and configuration.
+    properties:
+      - QueryExecutionId
+      - Query
+      - StatementType
+      - Status
+      - Statistics
+      - WorkGroup
+      - ResultConfiguration
+    related:
+      - NamedQuery
+      - WorkGroup
+
+  - name: NamedQuery
+    description: A saved SQL query with a name, description, and associated database for reuse across sessions.
+    properties:
+      - NamedQueryId
+      - Name
+      - Description
+      - Database
+      - QueryString
+      - WorkGroup
+    related:
+      - QueryExecution
+      - WorkGroup
+
+  - name: WorkGroup
+    description: An isolated environment for query management with separate configuration, permissions, and resource limits.
+    properties:
+      - Name
+      - State
+      - Description
+      - Configuration
+      - CreationTime
+    related:
+      - QueryExecution
+      - NamedQuery
+      - PreparedStatement
+
+  - name: DataCatalog
+    description: A catalog of data sources registered with Athena, such as AWS Glue, Hive, or Lambda-backed catalogs.
+    properties:
+      - Name
+      - Description
+      - Type
+      - Parameters
+    related:
+      - Database
+      - TableMetadata
+
+  - name: Database
+    description: A logical grouping of tables within a data catalog accessible through Athena.
+    properties:
+      - Name
+      - Description
+      - Parameters
+    related:
+      - DataCatalog
+      - TableMetadata
+
+  - name: TableMetadata
+    description: Metadata describing a table in an Athena database including columns, type, and partition keys.
+    properties:
+      - Name
+      - TableType
+      - Columns
+      - PartitionKeys
+      - Parameters
+    related:
+      - Database
+
+  - name: PreparedStatement
+    description: A parameterized SQL statement stored in a workgroup for efficient repeated execution.
+    properties:
+      - StatementName
+      - QueryStatement
+      - WorkGroupName
+      - Description
+      - LastModifiedTime
+    related:
+      - WorkGroup
+
+  - name: Tag
+    description: A key-value label applied to Athena resources for organization and cost allocation.
+    properties:
+      - Key
+      - Value
+    related:
+      - WorkGroup
+      - DataCatalog
+
+actions:
+  - name: StartQueryExecution
+    description: Run a SQL query against data in Amazon S3.
+    resource: QueryExecution
+    method: POST
+    path: /?Action=StartQueryExecution
+
+  - name: StopQueryExecution
+    description: Stop a running query execution.
+    resource: QueryExecution
+    method: POST
+    path: /?Action=StopQueryExecution
+
+  - name: GetQueryExecution
+    description: Get details and status of a specific query execution.
+    resource: QueryExecution
+    method: POST
+    path: /?Action=GetQueryExecution
+
+  - name: BatchGetQueryExecution
+    description: Get details for up to 50 query executions at once.
+    resource: QueryExecution
+    method: POST
+    path: /?Action=BatchGetQueryExecution
+
+  - name: ListQueryExecutions
+    description: List query execution IDs in a workgroup.
+    resource: QueryExecution
+    method: POST
+    path: /?Action=ListQueryExecutions
+
+  - name: GetQueryResults
+    description: Retrieve the results of a completed query execution.
+    resource: QueryExecution
+    method: POST
+    path: /?Action=GetQueryResults
+
+  - name: GetQueryRuntimeStatistics
+    description: Get runtime statistics for a completed query execution.
+    resource: QueryExecution
+    method: POST
+    path: /?Action=GetQueryRuntimeStatistics
+
+  - name: CreateNamedQuery
+    description: Save a SQL query as a named query for future reuse.
+    resource: NamedQuery
+    method: POST
+    path: /?Action=CreateNamedQuery
+
+  - name: DeleteNamedQuery
+    description: Delete a saved named query.
+    resource: NamedQuery
+    method: POST
+    path: /?Action=DeleteNamedQuery
+
+  - name: GetNamedQuery
+    description: Get details of a specific named query.
+    resource: NamedQuery
+    method: POST
+    path: /?Action=GetNamedQuery
+
+  - name: ListNamedQueries
+    description: List named query IDs in a workgroup.
+    resource: NamedQuery
+    method: POST
+    path: /?Action=ListNamedQueries
+
+  - name: BatchGetNamedQuery
+    description: Get details for up to 50 named queries at once.
+    resource: NamedQuery
+    method: POST
+    path: /?Action=BatchGetNamedQuery
+
+  - name: CreateWorkGroup
+    description: Create a new Athena workgroup.
+    resource: WorkGroup
+    method: POST
+    path: /?Action=CreateWorkGroup
+
+  - name: DeleteWorkGroup
+    description: Delete an Athena workgroup and optionally its contents.
+    resource: WorkGroup
+    method: POST
+    path: /?Action=DeleteWorkGroup
+
+  - name: GetWorkGroup
+    description: Get configuration and status of a workgroup.
+    resource: WorkGroup
+    method: POST
+    path: /?Action=GetWorkGroup
+
+  - name: UpdateWorkGroup
+    description: Update the configuration of a workgroup.
+    resource: WorkGroup
+    method: POST
+    path: /?Action=UpdateWorkGroup
+
+  - name: ListWorkGroups
+    description: List all workgroups in the account.
+    resource: WorkGroup
+    method: POST
+    path: /?Action=ListWorkGroups
+
+  - name: CreateDataCatalog
+    description: Register a new data catalog with Athena.
+    resource: DataCatalog
+    method: POST
+    path: /?Action=CreateDataCatalog
+
+  - name: DeleteDataCatalog
+    description: Deregister a data catalog from Athena.
+    resource: DataCatalog
+    method: POST
+    path: /?Action=DeleteDataCatalog
+
+  - name: GetDataCatalog
+    description: Get details of a specific data catalog.
+    resource: DataCatalog
+    method: POST
+    path: /?Action=GetDataCatalog
+
+  - name: ListDataCatalogs
+    description: List all data catalogs registered with Athena.
+    resource: DataCatalog
+    method: POST
+    path: /?Action=ListDataCatalogs
+
+  - name: ListDatabases
+    description: List databases in a data catalog.
+    resource: Database
+    method: POST
+    path: /?Action=ListDatabases
+
+  - name: GetDatabase
+    description: Get details of a specific database in a catalog.
+    resource: Database
+    method: POST
+    path: /?Action=GetDatabase
+
+  - name: ListTableMetadata
+    description: List table metadata for a database.
+    resource: TableMetadata
+    method: POST
+    path: /?Action=ListTableMetadata
+
+  - name: GetTableMetadata
+    description: Get metadata for a specific table.
+    resource: TableMetadata
+    method: POST
+    path: /?Action=GetTableMetadata
+
+  - name: CreatePreparedStatement
+    description: Create a parameterized prepared statement in a workgroup.
+    resource: PreparedStatement
+    method: POST
+    path: /?Action=CreatePreparedStatement
+
+  - name: DeletePreparedStatement
+    description: Delete a prepared statement from a workgroup.
+    resource: PreparedStatement
+    method: POST
+    path: /?Action=DeletePreparedStatement
+
+  - name: GetPreparedStatement
+    description: Get details of a specific prepared statement.
+    resource: PreparedStatement
+    method: POST
+    path: /?Action=GetPreparedStatement
+
+  - name: ListPreparedStatements
+    description: List prepared statements in a workgroup.
+    resource: PreparedStatement
+    method: POST
+    path: /?Action=ListPreparedStatements
+
+workflows:
+  - name: RunSQLQuery
+    description: End-to-end workflow for running a SQL query against S3 data with Athena.
+    steps:
+      - action: ListDataCatalogs
+        description: Discover available data catalogs
+      - action: ListDatabases
+        description: Explore databases in the catalog
+      - action: ListTableMetadata
+        description: Browse available tables and schemas
+      - action: StartQueryExecution
+        description: Execute the SQL query
+      - action: GetQueryExecution
+        description: Monitor query status until completion
+      - action: GetQueryResults
+        description: Retrieve the query results
+
+personas:
+  - name: Data Analyst
+    description: Runs SQL queries against S3 data using Athena for analytics and reporting workflows.
+    actions:
+      - StartQueryExecution
+      - StopQueryExecution
+      - GetQueryExecution
+      - GetQueryResults
+      - GetQueryRuntimeStatistics
+      - ListQueryExecutions
+      - CreateNamedQuery
+      - ListNamedQueries
+      - ListDatabases
+      - ListTableMetadata
+
+  - name: Data Engineer
+    description: Manages Athena infrastructure including workgroups, data catalogs, and prepared statements.
+    actions:
+      - CreateWorkGroup
+      - UpdateWorkGroup
+      - ListWorkGroups
+      - CreateDataCatalog
+      - ListDataCatalogs
+      - GetDataCatalog
+      - CreatePreparedStatement
+      - ListPreparedStatements
+      - ListDatabases
+      - ListTableMetadata

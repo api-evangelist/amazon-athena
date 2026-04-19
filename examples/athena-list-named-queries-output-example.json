@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-list-named-queries-output-schema.json",
+  "title": "ListNamedQueriesOutput Example",
+  "description": "An example of the Amazon Athena ListNamedQueriesOutput object."
+}

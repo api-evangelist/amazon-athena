@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-get-table-metadata-input-schema.json",
+  "title": "GetTableMetadataInput Example",
+  "description": "An example of the Amazon Athena GetTableMetadataInput object."
+}

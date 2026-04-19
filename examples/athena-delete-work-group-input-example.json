@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-delete-work-group-input-schema.json",
+  "title": "DeleteWorkGroupInput Example",
+  "description": "An example of the Amazon Athena DeleteWorkGroupInput object."
+}

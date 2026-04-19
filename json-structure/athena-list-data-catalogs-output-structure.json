@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-list-data-catalogs-output-structure.json",
+  "title": "ListDataCatalogsOutput",
+  "description": "JSON Structure for the Amazon Athena ListDataCatalogsOutput object.",
+  "type": "object",
+  "properties": {}
+}

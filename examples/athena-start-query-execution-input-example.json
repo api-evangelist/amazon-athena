@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-start-query-execution-input-schema.json",
+  "title": "StartQueryExecutionInput Example",
+  "description": "An example of the Amazon Athena StartQueryExecutionInput object."
+}

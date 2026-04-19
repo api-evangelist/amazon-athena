@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-named-query-schema.json",
+  "title": "NamedQuery",
+  "description": "JSON Schema for the Amazon Athena NamedQuery object.",
+  "type": "object",
+  "properties": {}
+}

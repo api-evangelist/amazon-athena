@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-delete-work-group-input-structure.json",
+  "title": "DeleteWorkGroupInput",
+  "description": "JSON Structure for the Amazon Athena DeleteWorkGroupInput object.",
+  "type": "object",
+  "properties": {}
+}

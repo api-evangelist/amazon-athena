@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-encryption-configuration-structure.json",
+  "title": "EncryptionConfiguration",
+  "description": "JSON Structure for the Amazon Athena EncryptionConfiguration object.",
+  "type": "object",
+  "properties": {}
+}

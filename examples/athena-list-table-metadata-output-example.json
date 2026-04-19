@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-list-table-metadata-output-schema.json",
+  "title": "ListTableMetadataOutput Example",
+  "description": "An example of the Amazon Athena ListTableMetadataOutput object."
+}

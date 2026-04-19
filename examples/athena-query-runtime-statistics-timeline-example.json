@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-runtime-statistics-timeline-schema.json",
+  "title": "QueryRuntimeStatisticsTimeline Example",
+  "description": "An example of the Amazon Athena QueryRuntimeStatisticsTimeline object."
+}

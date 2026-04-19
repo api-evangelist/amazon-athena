@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-get-query-results-output-structure.json",
+  "title": "GetQueryResultsOutput",
+  "description": "JSON Structure for the Amazon Athena GetQueryResultsOutput object.",
+  "type": "object",
+  "properties": {}
+}

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-create-data-catalog-input-schema.json",
+  "title": "CreateDataCatalogInput Example",
+  "description": "An example of the Amazon Athena CreateDataCatalogInput object."
+}

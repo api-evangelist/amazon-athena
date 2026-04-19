@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-delete-data-catalog-input-schema.json",
+  "title": "DeleteDataCatalogInput",
+  "description": "JSON Schema for the Amazon Athena DeleteDataCatalogInput object.",
+  "type": "object",
+  "properties": {}
+}

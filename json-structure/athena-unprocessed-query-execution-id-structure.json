@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-unprocessed-query-execution-id-structure.json",
+  "title": "UnprocessedQueryExecutionId",
+  "description": "JSON Structure for the Amazon Athena UnprocessedQueryExecutionId object.",
+  "type": "object",
+  "properties": {}
+}

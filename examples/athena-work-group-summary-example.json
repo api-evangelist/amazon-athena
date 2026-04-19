@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-summary-schema.json",
+  "title": "WorkGroupSummary Example",
+  "description": "An example of the Amazon Athena WorkGroupSummary object."
+}

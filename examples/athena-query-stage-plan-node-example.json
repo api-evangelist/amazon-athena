@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-stage-plan-node-schema.json",
+  "title": "QueryStagePlanNode Example",
+  "description": "An example of the Amazon Athena QueryStagePlanNode object."
+}

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-get-named-query-input-schema.json",
+  "title": "GetNamedQueryInput Example",
+  "description": "An example of the Amazon Athena GetNamedQueryInput object."
+}

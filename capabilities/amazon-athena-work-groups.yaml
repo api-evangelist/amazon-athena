@@ -1,0 +1,250 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Athena API — Work Groups
+  description: 'Amazon Athena API — Work Groups. 5 operations. Lead operation: Amazon Athena Create Work Group. Self-contained
+    Naftiko capability covering one Amazon Athena business surface.'
+  tags:
+  - Amazon Athena
+  - Work Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_ATHENA_API_KEY: AMAZON_ATHENA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-athena-work-groups
+    baseUri: https://athena.us-east-1.amazonaws.com
+    description: Amazon Athena API — Work Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: ?Action=CreateWorkGroup
+      path: /?Action=CreateWorkGroup
+      operations:
+      - name: createworkgroup
+        method: POST
+        description: Amazon Athena Create Work Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?Action=DeleteWorkGroup
+      path: /?Action=DeleteWorkGroup
+      operations:
+      - name: deleteworkgroup
+        method: POST
+        description: Amazon Athena Delete Work Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?Action=GetWorkGroup
+      path: /?Action=GetWorkGroup
+      operations:
+      - name: getworkgroup
+        method: POST
+        description: Amazon Athena Get Work Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?Action=ListWorkGroups
+      path: /?Action=ListWorkGroups
+      operations:
+      - name: listworkgroups
+        method: POST
+        description: Amazon Athena List Work Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?Action=UpdateWorkGroup
+      path: /?Action=UpdateWorkGroup
+      operations:
+      - name: updateworkgroup
+        method: POST
+        description: Amazon Athena Update Work Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_ATHENA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-athena-work-groups-rest
+    port: 8080
+    description: REST adapter for Amazon Athena API — Work Groups. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/action-createworkgroup
+      name: action-createworkgroup
+      description: REST surface for ?Action=CreateWorkGroup.
+      operations:
+      - method: POST
+        name: createworkgroup
+        description: Amazon Athena Create Work Group
+        call: amazon-athena-work-groups.createworkgroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-deleteworkgroup
+      name: action-deleteworkgroup
+      description: REST surface for ?Action=DeleteWorkGroup.
+      operations:
+      - method: POST
+        name: deleteworkgroup
+        description: Amazon Athena Delete Work Group
+        call: amazon-athena-work-groups.deleteworkgroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-getworkgroup
+      name: action-getworkgroup
+      description: REST surface for ?Action=GetWorkGroup.
+      operations:
+      - method: POST
+        name: getworkgroup
+        description: Amazon Athena Get Work Group
+        call: amazon-athena-work-groups.getworkgroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-listworkgroups
+      name: action-listworkgroups
+      description: REST surface for ?Action=ListWorkGroups.
+      operations:
+      - method: POST
+        name: listworkgroups
+        description: Amazon Athena List Work Groups
+        call: amazon-athena-work-groups.listworkgroups
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-updateworkgroup
+      name: action-updateworkgroup
+      description: REST surface for ?Action=UpdateWorkGroup.
+      operations:
+      - method: POST
+        name: updateworkgroup
+        description: Amazon Athena Update Work Group
+        call: amazon-athena-work-groups.updateworkgroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-athena-work-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Athena API — Work Groups. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amazon-athena-create-work-group
+      description: Amazon Athena Create Work Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-athena-work-groups.createworkgroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-athena-delete-work-group
+      description: Amazon Athena Delete Work Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-athena-work-groups.deleteworkgroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-athena-get-work-group
+      description: Amazon Athena Get Work Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-athena-work-groups.getworkgroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-athena-list-work-groups
+      description: Amazon Athena List Work Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-athena-work-groups.listworkgroups
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-athena-update-work-group
+      description: Amazon Athena Update Work Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-athena-work-groups.updateworkgroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,334 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Athena API — Query Executions
+  description: 'Amazon Athena API — Query Executions. 7 operations. Lead operation: Amazon Athena Batch Get Query Execution.
+    Self-contained Naftiko capability covering one Amazon Athena business surface.'
+  tags:
+  - Amazon Athena
+  - Query Executions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_ATHENA_API_KEY: AMAZON_ATHENA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-athena-query-executions
+    baseUri: https://athena.us-east-1.amazonaws.com
+    description: Amazon Athena API — Query Executions business capability. Self-contained, no shared references.
+    resources:
+    - name: ?Action=BatchGetQueryExecution
+      path: /?Action=BatchGetQueryExecution
+      operations:
+      - name: batchgetqueryexecution
+        method: POST
+        description: Amazon Athena Batch Get Query Execution
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?Action=GetQueryExecution
+      path: /?Action=GetQueryExecution
+      operations:
+      - name: getqueryexecution
+        method: POST
+        description: Amazon Athena Get Query Execution
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?Action=GetQueryResults
+      path: /?Action=GetQueryResults
+      operations:
+      - name: getqueryresults
+        method: POST
+        description: Amazon Athena Get Query Results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?Action=GetQueryRuntimeStatistics
+      path: /?Action=GetQueryRuntimeStatistics
+      operations:
+      - name: getqueryruntimestatistics
+        method: POST
+        description: Amazon Athena Get Query Runtime Statistics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?Action=ListQueryExecutions
+      path: /?Action=ListQueryExecutions
+      operations:
+      - name: listqueryexecutions
+        method: POST
+        description: Amazon Athena List Query Executions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?Action=StartQueryExecution
+      path: /?Action=StartQueryExecution
+      operations:
+      - name: startqueryexecution
+        method: POST
+        description: Amazon Athena Start Query Execution
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?Action=StopQueryExecution
+      path: /?Action=StopQueryExecution
+      operations:
+      - name: stopqueryexecution
+        method: POST
+        description: Amazon Athena Stop Query Execution
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_ATHENA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-athena-query-executions-rest
+    port: 8080
+    description: REST adapter for Amazon Athena API — Query Executions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/action-batchgetqueryexecution
+      name: action-batchgetqueryexecution
+      description: REST surface for ?Action=BatchGetQueryExecution.
+      operations:
+      - method: POST
+        name: batchgetqueryexecution
+        description: Amazon Athena Batch Get Query Execution
+        call: amazon-athena-query-executions.batchgetqueryexecution
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-getqueryexecution
+      name: action-getqueryexecution
+      description: REST surface for ?Action=GetQueryExecution.
+      operations:
+      - method: POST
+        name: getqueryexecution
+        description: Amazon Athena Get Query Execution
+        call: amazon-athena-query-executions.getqueryexecution
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-getqueryresults
+      name: action-getqueryresults
+      description: REST surface for ?Action=GetQueryResults.
+      operations:
+      - method: POST
+        name: getqueryresults
+        description: Amazon Athena Get Query Results
+        call: amazon-athena-query-executions.getqueryresults
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-getqueryruntimestatistics
+      name: action-getqueryruntimestatistics
+      description: REST surface for ?Action=GetQueryRuntimeStatistics.
+      operations:
+      - method: POST
+        name: getqueryruntimestatistics
+        description: Amazon Athena Get Query Runtime Statistics
+        call: amazon-athena-query-executions.getqueryruntimestatistics
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-listqueryexecutions
+      name: action-listqueryexecutions
+      description: REST surface for ?Action=ListQueryExecutions.
+      operations:
+      - method: POST
+        name: listqueryexecutions
+        description: Amazon Athena List Query Executions
+        call: amazon-athena-query-executions.listqueryexecutions
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-startqueryexecution
+      name: action-startqueryexecution
+      description: REST surface for ?Action=StartQueryExecution.
+      operations:
+      - method: POST
+        name: startqueryexecution
+        description: Amazon Athena Start Query Execution
+        call: amazon-athena-query-executions.startqueryexecution
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/action-stopqueryexecution
+      name: action-stopqueryexecution
+      description: REST surface for ?Action=StopQueryExecution.
+      operations:
+      - method: POST
+        name: stopqueryexecution
+        description: Amazon Athena Stop Query Execution
+        call: amazon-athena-query-executions.stopqueryexecution
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-athena-query-executions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Athena API — Query Executions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-athena-batch-get-query
+      description: Amazon Athena Batch Get Query Execution
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-athena-query-executions.batchgetqueryexecution
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-athena-get-query-execution
+      description: Amazon Athena Get Query Execution
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-athena-query-executions.getqueryexecution
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-athena-get-query-results
+      description: Amazon Athena Get Query Results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-athena-query-executions.getqueryresults
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-athena-get-query-runtime
+      description: Amazon Athena Get Query Runtime Statistics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-athena-query-executions.getqueryruntimestatistics
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-athena-list-query-executions
+      description: Amazon Athena List Query Executions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-athena-query-executions.listqueryexecutions
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-athena-start-query-execution
+      description: Amazon Athena Start Query Execution
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-athena-query-executions.startqueryexecution
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-athena-stop-query-execution
+      description: Amazon Athena Stop Query Execution
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-athena-query-executions.stopqueryexecution
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

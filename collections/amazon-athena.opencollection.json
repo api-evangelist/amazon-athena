@@ -1,0 +1,562 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Athena API",
+    "version": "2017-05-18"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Query Executions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena Start Query Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=StartQueryExecution",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs the SQL query statements contained in the query string. Requires you to have access to the workgroup in which the query ran."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Stop Query Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=StopQueryExecution",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stops a query execution. Requires you to have access to the workgroup in which the query ran."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Query Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetQueryExecution",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns information about a single execution of a query if you have access to the work group in which the query ran."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Batch Get Query Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=BatchGetQueryExecution",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena List Query Executions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListQueryExecutions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides a list of available query execution IDs for the queries in the specified workgroup."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Query Results",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetQueryResults",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Streams the results of a single query execution specified by QueryExecutionId from the Athena query results location in Amazon S3."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Query Runtime Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetQueryRuntimeStatistics",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Named Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena Create Named Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=CreateNamedQuery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a named query in the specified workgroup. Requires that you have access to the workgroup."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Delete Named Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=DeleteNamedQuery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the named query if you have access to the workgroup in which the query was saved."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Named Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetNamedQuery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns information about a single query. Requires that you have access to the workgroup in which the query was saved."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena List Named Queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListNamedQueries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides a list of available query IDs only for queries saved in the specified workgroup."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Batch Get Named Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=BatchGetNamedQuery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Work Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena Create Work Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=CreateWorkGroup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a workgroup with the specified name. A workgroup can contain one or more named queries or scheduled queries."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Delete Work Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=DeleteWorkGroup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the workgroup with the specified name. The primary workgroup cannot be deleted."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Work Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetWorkGroup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns information about the workgroup with the specified name."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Update Work Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=UpdateWorkGroup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the workgroup with the specified name. The workgroup's name cannot be changed."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena List Work Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListWorkGroups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists available workgroups for the account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Catalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena Create Data Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=CreateDataCatalog",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates (registers) a data catalog with the specified name and properties. Catalogs created are visible to all users of the same AWS account."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Delete Data Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=DeleteDataCatalog",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes a data catalog."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Data Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetDataCatalog",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the specified data catalog."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena List Data Catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListDataCatalogs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the data catalogs in the current AWS account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Databases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena List Databases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListDatabases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the databases in the specified data catalog."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetDatabase",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a database object for the specified database and data catalog."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Table Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena List Table Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListTableMetadata",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the metadata for the tables in the specified data catalog database."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Table Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetTableMetadata",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns table metadata for the specified catalog, database, and table."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Prepared Statements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena Create Prepared Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=CreatePreparedStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a prepared statement for use with SQL queries in Athena."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Delete Prepared Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=DeletePreparedStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the prepared statement with the specified name from the specified workgroup."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Prepared Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetPreparedStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the prepared statement with the specified name from the specified workgroup."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena List Prepared Statements",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListPreparedStatements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the prepared statements in the specified workgroup."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena Tag Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=TagResource",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds one or more tags to an Athena resource. A tag is a label that you assign to an AWS Athena resource."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Untag Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=UntagResource",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes one or more tags from a resource."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena List Tags For Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListTagsForResource",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the tags associated with an Athena resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

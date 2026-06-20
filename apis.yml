@@ -4,7 +4,7 @@ description: >-
   Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL.
   Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Amazon Athena
   - SQL
@@ -21,7 +21,7 @@ apis:
     description: >-
       REST management API for Amazon Athena covering query executions, named queries, work groups, data catalogs,
       databases, table metadata, and prepared statements.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
     baseURL: https://athena.us-east-1.amazonaws.com
     tags:

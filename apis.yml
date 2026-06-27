@@ -58,10 +58,10 @@ apis:
       - type: JSONLD
         url: >-
           https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-ld/amazon-athena-context.jsonld
-      - type: Example
+      - type: Examples
         url: >-
           https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-query-execution-example.json
-      - type: Example
+      - type: Examples
         url: >-
           https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
 common:

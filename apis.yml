@@ -65,6 +65,12 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
 common:
+  - type: VulnerabilityDisclosure
+    url: security/amazon-athena-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-athena-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-athena-authentication.yml
   - type: Features
     data:
       - Serverless SQL query execution against Amazon S3 data

@@ -1,179 +1,232 @@
+# amazon-athena — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on amazonaws.com
+#   - operationid-casing: camel @ 100% (n=32)
+#   - schema-names-casing: pascal @ 100% (n=98)
+#   - schema-properties-casing: pascal @ 100% (n=256)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: AthenaError
+#   - merge: kept 19 existing, added 7 measured, upgraded 0
+#   - added: servers-https-only, servers-expected-domain, schema-names-casing, schema-properties-casing, security-schemes-defined, error-schema-defined, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   athena-query-string-required:
     description: StartQueryExecution must require QueryString
     message: StartQueryExecutionInput must have QueryString as required
     severity: error
-    given: "$.components.schemas.StartQueryExecutionInput"
+    given: $.components.schemas.StartQueryExecutionInput
     then:
       field: required
       function: truthy
-
   athena-operation-id-camel-case:
     description: All operationIds must be camelCase
-    message: "{{property}} must be camelCase"
+    message: '{{property}} must be camelCase'
     severity: warn
-    given: "$.paths[*][*].operationId"
+    given: $.paths[*][*].operationId
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]*$"
-
+        match: ^[a-z][a-zA-Z0-9]*$
   athena-summary-prefix:
     description: All operation summaries must start with Amazon Athena
     message: Summary must start with Amazon Athena
     severity: warn
-    given: "$.paths[*][*].summary"
+    given: $.paths[*][*].summary
     then:
       function: pattern
       functionOptions:
-        match: "^Amazon Athena"
-
+        match: ^Amazon Athena
   athena-has-tags:
     description: All operations must have tags
     message: Operation must have at least one tag
     severity: warn
-    given: "$.paths[*][*]"
+    given: $.paths[*][*]
     then:
       field: tags
       function: truthy
-
   athena-server-url-fixed:
     description: Server URL must be fixed without variables
     message: Server URL must not use variables
     severity: warn
-    given: "$.servers[*]"
+    given: $.servers[*]
     then:
       field: variables
       function: falsy
-
   athena-response-200:
     description: All operations must have a 200 response
     message: Operation must define a 200 response
     severity: error
-    given: "$.paths[*][*].responses"
+    given: $.paths[*][*].responses
     then:
-      field: "200"
+      field: '200'
       function: truthy
-
   athena-request-body-required:
     description: POST operations must have a request body
     message: POST operation must have a requestBody
     severity: error
-    given: "$.paths[*].post"
+    given: $.paths[*].post
     then:
       field: requestBody
       function: truthy
-
   athena-query-execution-id-string:
     description: QueryExecutionId must be of type string
     message: QueryExecutionId must be a string
     severity: error
-    given: "$.components.schemas[*].properties.QueryExecutionId"
+    given: $.components.schemas[*].properties.QueryExecutionId
     then:
       field: type
       function: enumeration
       functionOptions:
         values:
-          - string
-
+        - string
   athena-named-query-id-string:
     description: NamedQueryId must be of type string
     message: NamedQueryId must be a string
     severity: error
-    given: "$.components.schemas[*].properties.NamedQueryId"
+    given: $.components.schemas[*].properties.NamedQueryId
     then:
       field: type
       function: enumeration
       functionOptions:
         values:
-          - string
-
+        - string
   athena-work-group-state-enum:
     description: WorkGroup State must use valid enum values
     message: WorkGroup State must be ENABLED or DISABLED
     severity: error
-    given: "$.components.schemas.WorkGroup.properties.State"
+    given: $.components.schemas.WorkGroup.properties.State
     then:
       field: enum
       function: truthy
-
   athena-data-catalog-type-enum:
     description: DataCatalog Type must use valid enum values
     message: DataCatalog Type must be LAMBDA, GLUE, or HIVE
     severity: error
-    given: "$.components.schemas.DataCatalog.properties.Type"
+    given: $.components.schemas.DataCatalog.properties.Type
     then:
       field: enum
       function: truthy
-
   athena-query-status-state-enum:
     description: QueryExecutionStatus State must use valid enum values
     message: State must be QUEUED, RUNNING, SUCCEEDED, FAILED, or CANCELLED
     severity: error
-    given: "$.components.schemas.QueryExecutionStatus.properties.State"
+    given: $.components.schemas.QueryExecutionStatus.properties.State
     then:
       field: enum
       function: truthy
-
   athena-tag-key-defined:
     description: Tag schema must define Key property
     message: Tag must have a Key property
     severity: error
-    given: "$.components.schemas.Tag.properties"
+    given: $.components.schemas.Tag.properties
     then:
       field: Key
       function: truthy
-
   athena-tag-value-defined:
     description: Tag schema must define Value property
     message: Tag must have a Value property
     severity: error
-    given: "$.components.schemas.Tag.properties"
+    given: $.components.schemas.Tag.properties
     then:
       field: Value
       function: truthy
-
   athena-result-configuration-output-location:
     description: ResultConfiguration must have OutputLocation
     message: ResultConfiguration must define OutputLocation
     severity: warn
-    given: "$.components.schemas.ResultConfiguration.properties"
+    given: $.components.schemas.ResultConfiguration.properties
     then:
       field: OutputLocation
       function: truthy
-
   athena-engine-version-defined:
     description: EngineVersion schema must be defined
     message: EngineVersion must be defined in components
     severity: warn
-    given: "$.components.schemas"
+    given: $.components.schemas
     then:
       field: EngineVersion
       function: truthy
-
   athena-column-info-name-defined:
     description: ColumnInfo must define Name property
     message: ColumnInfo must have Name
     severity: error
-    given: "$.components.schemas.ColumnInfo.properties"
+    given: $.components.schemas.ColumnInfo.properties
     then:
       field: Name
       function: truthy
-
   athena-example-microcks-default:
     description: All examples must have x-microcks-default set to true
     message: Example must have x-microcks-default true
     severity: warn
-    given: "$.paths[*][*].requestBody.content[*].examples.default"
+    given: $.paths[*][*].requestBody.content[*].examples.default
     then:
       field: x-microcks-default
       function: truthy
-
   athena-security-sigv4:
     description: API must use sigv4 security scheme
     message: Security must include sigv4
     severity: error
-    given: "$.security[*]"
+    given: $.security[*]
     then:
       field: sigv4
       function: defined
+  servers-https-only:
+    description: Server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: ^https://
+  servers-expected-domain:
+    description: Server URLs should be on the amazonaws.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: amazonaws\.com
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: ^[A-Z][A-Za-z0-9]*$
+  security-schemes-defined:
+    description: Security schemes should be defined in components.
+    severity: warn
+    given: $.components
+    then:
+      field: securitySchemes
+      function: truthy
+  error-schema-defined:
+    description: A shared error schema (AthenaError) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: AthenaError
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy

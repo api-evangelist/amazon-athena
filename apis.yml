@@ -65,6 +65,8 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-athena-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/amazon-athena-vulnerability-disclosure.yml
   - type: DomainSecurity

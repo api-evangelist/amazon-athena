@@ -1,0 +1,406 @@
+openapi: 3.1.0
+info:
+  title: Amazon Athena Data Catalogs Work Groups API
+  description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
+  version: '2017-05-18'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://athena.us-east-1.amazonaws.com
+  description: Amazon Athena API endpoint
+security:
+- sigv4: []
+tags:
+- name: Work Groups
+  description: Operations for managing Athena work groups
+paths:
+  /?Action=CreateWorkGroup:
+    post:
+      operationId: createWorkGroup
+      summary: Amazon Athena Create Work Group
+      description: Creates a workgroup with the specified name. A workgroup can contain one or more named queries or scheduled queries.
+      tags:
+      - Work Groups
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkGroupInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  Name: my-workgroup
+                  Description: Production workgroup
+                  Configuration:
+                    ResultConfiguration:
+                      OutputLocation: s3://my-bucket/workgroup-results/
+                    EnforceWorkGroupConfiguration: true
+                    PublishCloudWatchMetricsEnabled: true
+                  Tags:
+                  - Key: Environment
+                    Value: Production
+      responses:
+        '200':
+          description: Work group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkGroupOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+  /?Action=DeleteWorkGroup:
+    post:
+      operationId: deleteWorkGroup
+      summary: Amazon Athena Delete Work Group
+      description: Deletes the workgroup with the specified name. The primary workgroup cannot be deleted.
+      tags:
+      - Work Groups
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteWorkGroupInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  WorkGroup: my-workgroup
+                  RecursiveDeleteOption: true
+      responses:
+        '200':
+          description: Work group deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkGroupOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+  /?Action=GetWorkGroup:
+    post:
+      operationId: getWorkGroup
+      summary: Amazon Athena Get Work Group
+      description: Returns information about the workgroup with the specified name.
+      tags:
+      - Work Groups
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetWorkGroupInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  WorkGroup: primary
+      responses:
+        '200':
+          description: Work group retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkGroupOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    WorkGroup:
+                      Name: primary
+                      Description: Primary workgroup
+                      State: ENABLED
+                      Configuration:
+                        ResultConfiguration:
+                          OutputLocation: s3://my-bucket/results/
+                        EnforceWorkGroupConfiguration: false
+  /?Action=UpdateWorkGroup:
+    post:
+      operationId: updateWorkGroup
+      summary: Amazon Athena Update Work Group
+      description: Updates the workgroup with the specified name. The workgroup's name cannot be changed.
+      tags:
+      - Work Groups
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkGroupInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  WorkGroup: my-workgroup
+                  Description: Updated description
+                  State: ENABLED
+      responses:
+        '200':
+          description: Work group updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkGroupOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+  /?Action=ListWorkGroups:
+    post:
+      operationId: listWorkGroups
+      summary: Amazon Athena List Work Groups
+      description: Lists available workgroups for the account.
+      tags:
+      - Work Groups
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListWorkGroupsInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  MaxResults: 10
+      responses:
+        '200':
+          description: Work groups listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkGroupsOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    WorkGroups:
+                    - Name: primary
+                      State: ENABLED
+                      Description: Primary workgroup
+                    NextToken: ''
+components:
+  schemas:
+    WorkGroup:
+      type: object
+      properties:
+        Name:
+          type: string
+        State:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+        Configuration:
+          $ref: '#/components/schemas/WorkGroupConfiguration'
+        Description:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+    EngineVersion:
+      type: object
+      properties:
+        SelectedEngineVersion:
+          type: string
+          description: The engine version requested by the user
+        EffectiveEngineVersion:
+          type: string
+          description: The engine version on which the query runs
+    GetWorkGroupInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+    ResultConfigurationUpdates:
+      type: object
+      properties:
+        OutputLocation:
+          type: string
+        RemoveOutputLocation:
+          type: boolean
+        EncryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+        RemoveEncryptionConfiguration:
+          type: boolean
+        ExpectedBucketOwner:
+          type: string
+        RemoveExpectedBucketOwner:
+          type: boolean
+    DeleteWorkGroupOutput:
+      type: object
+    WorkGroupConfigurationUpdates:
+      type: object
+      properties:
+        EnforceWorkGroupConfiguration:
+          type: boolean
+        ResultConfigurationUpdates:
+          $ref: '#/components/schemas/ResultConfigurationUpdates'
+        PublishCloudWatchMetricsEnabled:
+          type: boolean
+        BytesScannedCutoffPerQuery:
+          type: integer
+        RemoveBytesScannedCutoffPerQuery:
+          type: boolean
+        RequesterPaysEnabled:
+          type: boolean
+        EngineVersion:
+          $ref: '#/components/schemas/EngineVersion'
+    GetWorkGroupOutput:
+      type: object
+      properties:
+        WorkGroup:
+          $ref: '#/components/schemas/WorkGroup'
+    DeleteWorkGroupInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+        RecursiveDeleteOption:
+          type: boolean
+          description: The option to delete the workgroup and its contents even if the workgroup contains any named queries or query executions
+    ListWorkGroupsInput:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    UpdateWorkGroupInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+        Description:
+          type: string
+        ConfigurationUpdates:
+          $ref: '#/components/schemas/WorkGroupConfigurationUpdates'
+        State:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+    WorkGroupSummary:
+      type: object
+      properties:
+        Name:
+          type: string
+        State:
+          type: string
+        Description:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        EngineVersion:
+          $ref: '#/components/schemas/EngineVersion'
+    ListWorkGroupsOutput:
+      type: object
+      properties:
+        WorkGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkGroupSummary'
+        NextToken:
+          type: string
+    CreateWorkGroupInput:
+      type: object
+      required:
+      - Name
+      properties:
+        Name:
+          type: string
+          description: The workgroup name
+        Configuration:
+          $ref: '#/components/schemas/WorkGroupConfiguration'
+        Description:
+          type: string
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    WorkGroupConfiguration:
+      type: object
+      properties:
+        ResultConfiguration:
+          $ref: '#/components/schemas/ResultConfiguration'
+        EnforceWorkGroupConfiguration:
+          type: boolean
+        PublishCloudWatchMetricsEnabled:
+          type: boolean
+        BytesScannedCutoffPerQuery:
+          type: integer
+        RequesterPaysEnabled:
+          type: boolean
+        EngineVersion:
+          $ref: '#/components/schemas/EngineVersion'
+    UpdateWorkGroupOutput:
+      type: object
+    EncryptionConfiguration:
+      type: object
+      properties:
+        EncryptionOption:
+          type: string
+          enum:
+          - SSE_S3
+          - SSE_KMS
+          - CSE_KMS
+        KmsKey:
+          type: string
+    CreateWorkGroupOutput:
+      type: object
+    ResultConfiguration:
+      type: object
+      properties:
+        OutputLocation:
+          type: string
+          description: The location in Amazon S3 where your query results are stored
+        EncryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+        ExpectedBucketOwner:
+          type: string
+    Tag:
+      type: object
+      properties:
+        Key:
+          type: string
+          description: A tag key
+        Value:
+          type: string
+          description: A tag value
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4

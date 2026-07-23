@@ -1,0 +1,194 @@
+openapi: 3.1.0
+info:
+  title: Amazon Athena Data Catalogs Table Metadata API
+  description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
+  version: '2017-05-18'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://athena.us-east-1.amazonaws.com
+  description: Amazon Athena API endpoint
+security:
+- sigv4: []
+tags:
+- name: Table Metadata
+  description: Operations for listing and getting table metadata
+paths:
+  /?Action=ListTableMetadata:
+    post:
+      operationId: listTableMetadata
+      summary: Amazon Athena List Table Metadata
+      description: Lists the metadata for the tables in the specified data catalog database.
+      tags:
+      - Table Metadata
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTableMetadataInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  CatalogName: AwsDataCatalog
+                  DatabaseName: my_database
+                  MaxResults: 10
+      responses:
+        '200':
+          description: Table metadata listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTableMetadataOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    TableMetadataList:
+                    - Name: my_table
+                      TableType: EXTERNAL_TABLE
+                      Columns:
+                      - Name: id
+                        Type: int
+                      - Name: name
+                        Type: string
+                    NextToken: ''
+  /?Action=GetTableMetadata:
+    post:
+      operationId: getTableMetadata
+      summary: Amazon Athena Get Table Metadata
+      description: Returns table metadata for the specified catalog, database, and table.
+      tags:
+      - Table Metadata
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTableMetadataInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  CatalogName: AwsDataCatalog
+                  DatabaseName: my_database
+                  TableName: my_table
+      responses:
+        '200':
+          description: Table metadata retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTableMetadataOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    TableMetadata:
+                      Name: my_table
+                      TableType: EXTERNAL_TABLE
+                      Columns:
+                      - Name: id
+                        Type: int
+                      - Name: name
+                        Type: string
+                      Parameters:
+                        classification: parquet
+                        location: s3://my-bucket/my_table/
+components:
+  schemas:
+    GetTableMetadataInput:
+      type: object
+      required:
+      - CatalogName
+      - DatabaseName
+      - TableName
+      properties:
+        CatalogName:
+          type: string
+        DatabaseName:
+          type: string
+        TableName:
+          type: string
+    GetTableMetadataOutput:
+      type: object
+      properties:
+        TableMetadata:
+          $ref: '#/components/schemas/TableMetadata'
+    TableMetadata:
+      type: object
+      properties:
+        Name:
+          type: string
+        CreateTime:
+          type: string
+          format: date-time
+        LastAccessTime:
+          type: string
+          format: date-time
+        TableType:
+          type: string
+        Columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Column'
+        PartitionKeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Column'
+        Parameters:
+          type: object
+          additionalProperties:
+            type: string
+    Column:
+      type: object
+      properties:
+        Name:
+          type: string
+        Type:
+          type: string
+        Comment:
+          type: string
+    ListTableMetadataInput:
+      type: object
+      required:
+      - CatalogName
+      - DatabaseName
+      properties:
+        CatalogName:
+          type: string
+        DatabaseName:
+          type: string
+        Expression:
+          type: string
+          description: A regex filter that pattern-matches table names
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    ListTableMetadataOutput:
+      type: object
+      properties:
+        TableMetadataList:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableMetadata'
+        NextToken:
+          type: string
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4

@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: Amazon Athena Data Catalogs API
+  description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
+  version: '2017-05-18'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://athena.us-east-1.amazonaws.com
+  description: Amazon Athena API endpoint
+security:
+- sigv4: []
+tags:
+- name: Data Catalogs
+  description: Operations for managing data catalogs
+paths:
+  /?Action=CreateDataCatalog:
+    post:
+      operationId: createDataCatalog
+      summary: Amazon Athena Create Data Catalog
+      description: Creates (registers) a data catalog with the specified name and properties. Catalogs created are visible to all users of the same AWS account.
+      tags:
+      - Data Catalogs
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDataCatalogInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  Name: my-catalog
+                  Type: GLUE
+                  Description: AWS Glue data catalog
+                  Parameters:
+                    catalog-id: '123456789012'
+                  Tags:
+                  - Key: Environment
+                    Value: Production
+      responses:
+        '200':
+          description: Data catalog created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDataCatalogOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+  /?Action=DeleteDataCatalog:
+    post:
+      operationId: deleteDataCatalog
+      summary: Amazon Athena Delete Data Catalog
+      description: Deletes a data catalog.
+      tags:
+      - Data Catalogs
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDataCatalogInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  Name: my-catalog
+      responses:
+        '200':
+          description: Data catalog deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDataCatalogOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+  /?Action=GetDataCatalog:
+    post:
+      operationId: getDataCatalog
+      summary: Amazon Athena Get Data Catalog
+      description: Returns the specified data catalog.
+      tags:
+      - Data Catalogs
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDataCatalogInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  Name: AwsDataCatalog
+      responses:
+        '200':
+          description: Data catalog retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDataCatalogOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    DataCatalog:
+                      Name: AwsDataCatalog
+                      Description: Default AWS Glue Data Catalog
+                      Type: GLUE
+                      Parameters:
+                        catalog-id: '123456789012'
+  /?Action=ListDataCatalogs:
+    post:
+      operationId: listDataCatalogs
+      summary: Amazon Athena List Data Catalogs
+      description: Lists the data catalogs in the current AWS account.
+      tags:
+      - Data Catalogs
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDataCatalogsInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  MaxResults: 10
+      responses:
+        '200':
+          description: Data catalogs listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDataCatalogsOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    DataCatalogsSummary:
+                    - CatalogName: AwsDataCatalog
+                      Type: GLUE
+                    NextToken: ''
+components:
+  schemas:
+    GetDataCatalogOutput:
+      type: object
+      properties:
+        DataCatalog:
+          $ref: '#/components/schemas/DataCatalog'
+    ListDataCatalogsInput:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    DataCatalog:
+      type: object
+      properties:
+        Name:
+          type: string
+        Description:
+          type: string
+        Type:
+          type: string
+          enum:
+          - LAMBDA
+          - GLUE
+          - HIVE
+        Parameters:
+          type: object
+          additionalProperties:
+            type: string
+    CreateDataCatalogOutput:
+      type: object
+    DeleteDataCatalogInput:
+      type: object
+      required:
+      - Name
+      properties:
+        Name:
+          type: string
+    CreateDataCatalogInput:
+      type: object
+      required:
+      - Name
+      - Type
+      properties:
+        Name:
+          type: string
+          description: The name of the data catalog to create
+        Type:
+          type: string
+          enum:
+          - LAMBDA
+          - GLUE
+          - HIVE
+          description: The type of data catalog to create
+        Description:
+          type: string
+        Parameters:
+          type: object
+          additionalProperties:
+            type: string
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    DataCatalogSummary:
+      type: object
+      properties:
+        CatalogName:
+          type: string
+        Type:
+          type: string
+          enum:
+          - LAMBDA
+          - GLUE
+          - HIVE
+    GetDataCatalogInput:
+      type: object
+      required:
+      - Name
+      properties:
+        Name:
+          type: string
+    ListDataCatalogsOutput:
+      type: object
+      properties:
+        DataCatalogsSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataCatalogSummary'
+        NextToken:
+          type: string
+    DeleteDataCatalogOutput:
+      type: object
+    Tag:
+      type: object
+      properties:
+        Key:
+          type: string
+          description: A tag key
+        Value:
+          type: string
+          description: A tag value
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4

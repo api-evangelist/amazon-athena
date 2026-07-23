@@ -1,0 +1,260 @@
+openapi: 3.1.0
+info:
+  title: Amazon Athena Data Catalogs Prepared Statements API
+  description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
+  version: '2017-05-18'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://athena.us-east-1.amazonaws.com
+  description: Amazon Athena API endpoint
+security:
+- sigv4: []
+tags:
+- name: Prepared Statements
+  description: Operations for managing prepared SQL statements
+paths:
+  /?Action=CreatePreparedStatement:
+    post:
+      operationId: createPreparedStatement
+      summary: Amazon Athena Create Prepared Statement
+      description: Creates a prepared statement for use with SQL queries in Athena.
+      tags:
+      - Prepared Statements
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePreparedStatementInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  StatementName: my_prepared_statement
+                  WorkGroup: primary
+                  QueryStatement: SELECT * FROM my_table WHERE id = ?
+                  Description: Query by ID
+      responses:
+        '200':
+          description: Prepared statement created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePreparedStatementOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+  /?Action=DeletePreparedStatement:
+    post:
+      operationId: deletePreparedStatement
+      summary: Amazon Athena Delete Prepared Statement
+      description: Deletes the prepared statement with the specified name from the specified workgroup.
+      tags:
+      - Prepared Statements
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePreparedStatementInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  StatementName: my_prepared_statement
+                  WorkGroup: primary
+      responses:
+        '200':
+          description: Prepared statement deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePreparedStatementOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+  /?Action=GetPreparedStatement:
+    post:
+      operationId: getPreparedStatement
+      summary: Amazon Athena Get Prepared Statement
+      description: Retrieves the prepared statement with the specified name from the specified workgroup.
+      tags:
+      - Prepared Statements
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPreparedStatementInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  StatementName: my_prepared_statement
+                  WorkGroup: primary
+      responses:
+        '200':
+          description: Prepared statement retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPreparedStatementOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    PreparedStatement:
+                      StatementName: my_prepared_statement
+                      WorkGroupName: primary
+                      QueryStatement: SELECT * FROM my_table WHERE id = ?
+                      Description: Query by ID
+  /?Action=ListPreparedStatements:
+    post:
+      operationId: listPreparedStatements
+      summary: Amazon Athena List Prepared Statements
+      description: Lists the prepared statements in the specified workgroup.
+      tags:
+      - Prepared Statements
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPreparedStatementsInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  WorkGroup: primary
+                  MaxResults: 10
+      responses:
+        '200':
+          description: Prepared statements listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPreparedStatementsOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    PreparedStatements:
+                    - StatementName: my_prepared_statement
+                      LastModifiedTime: '2024-01-15T10:30:00Z'
+                    NextToken: ''
+components:
+  schemas:
+    ListPreparedStatementsInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    DeletePreparedStatementInput:
+      type: object
+      required:
+      - StatementName
+      - WorkGroup
+      properties:
+        StatementName:
+          type: string
+        WorkGroup:
+          type: string
+    CreatePreparedStatementInput:
+      type: object
+      required:
+      - StatementName
+      - WorkGroup
+      - QueryStatement
+      properties:
+        StatementName:
+          type: string
+          description: The name of the prepared statement
+        WorkGroup:
+          type: string
+          description: The name of the workgroup to which the prepared statement belongs
+        QueryStatement:
+          type: string
+          description: The query string for the prepared statement
+        Description:
+          type: string
+    CreatePreparedStatementOutput:
+      type: object
+    GetPreparedStatementOutput:
+      type: object
+      properties:
+        PreparedStatement:
+          $ref: '#/components/schemas/PreparedStatement'
+    PreparedStatementSummary:
+      type: object
+      properties:
+        StatementName:
+          type: string
+        LastModifiedTime:
+          type: string
+          format: date-time
+    GetPreparedStatementInput:
+      type: object
+      required:
+      - StatementName
+      - WorkGroup
+      properties:
+        StatementName:
+          type: string
+        WorkGroup:
+          type: string
+    DeletePreparedStatementOutput:
+      type: object
+    ListPreparedStatementsOutput:
+      type: object
+      properties:
+        PreparedStatements:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreparedStatementSummary'
+        NextToken:
+          type: string
+    PreparedStatement:
+      type: object
+      properties:
+        StatementName:
+          type: string
+        QueryStatement:
+          type: string
+        WorkGroupName:
+          type: string
+        Description:
+          type: string
+        LastModifiedTime:
+          type: string
+          format: date-time
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4

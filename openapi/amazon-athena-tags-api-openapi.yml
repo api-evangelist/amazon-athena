@@ -1,0 +1,191 @@
+openapi: 3.1.0
+info:
+  title: Amazon Athena Data Catalogs Tags API
+  description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
+  version: '2017-05-18'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://athena.us-east-1.amazonaws.com
+  description: Amazon Athena API endpoint
+security:
+- sigv4: []
+tags:
+- name: Tags
+  description: Operations for managing resource tags
+paths:
+  /?Action=TagResource:
+    post:
+      operationId: tagResource
+      summary: Amazon Athena Tag Resource
+      description: Adds one or more tags to an Athena resource. A tag is a label that you assign to an AWS Athena resource.
+      tags:
+      - Tags
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  ResourceARN: arn:aws:athena:us-east-1:123456789012:workgroup/my-workgroup
+                  Tags:
+                  - Key: Environment
+                    Value: Production
+      responses:
+        '200':
+          description: Tags added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+  /?Action=UntagResource:
+    post:
+      operationId: untagResource
+      summary: Amazon Athena Untag Resource
+      description: Removes one or more tags from a resource.
+      tags:
+      - Tags
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  ResourceARN: arn:aws:athena:us-east-1:123456789012:workgroup/my-workgroup
+                  TagKeys:
+                  - Environment
+      responses:
+        '200':
+          description: Tags removed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+  /?Action=ListTagsForResource:
+    post:
+      operationId: listTagsForResource
+      summary: Amazon Athena List Tags For Resource
+      description: Lists the tags associated with an Athena resource.
+      tags:
+      - Tags
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  ResourceARN: arn:aws:athena:us-east-1:123456789012:workgroup/my-workgroup
+      responses:
+        '200':
+          description: Tags listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Tags:
+                    - Key: Environment
+                      Value: Production
+                    NextToken: ''
+components:
+  schemas:
+    TagResourceOutput:
+      type: object
+    UntagResourceOutput:
+      type: object
+    TagResourceInput:
+      type: object
+      required:
+      - ResourceARN
+      - Tags
+      properties:
+        ResourceARN:
+          type: string
+          description: Specifies the ARN of the Athena resource to which tags are to be added
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    ListTagsForResourceInput:
+      type: object
+      required:
+      - ResourceARN
+      properties:
+        ResourceARN:
+          type: string
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    UntagResourceInput:
+      type: object
+      required:
+      - ResourceARN
+      - TagKeys
+      properties:
+        ResourceARN:
+          type: string
+        TagKeys:
+          type: array
+          items:
+            type: string
+    Tag:
+      type: object
+      properties:
+        Key:
+          type: string
+          description: A tag key
+        Value:
+          type: string
+          description: A tag value
+    ListTagsForResourceOutput:
+      type: object
+      properties:
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        NextToken:
+          type: string
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4

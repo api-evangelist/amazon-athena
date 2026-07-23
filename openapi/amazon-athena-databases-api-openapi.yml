@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: Amazon Athena Data Catalogs Databases API
+  description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
+  version: '2017-05-18'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://athena.us-east-1.amazonaws.com
+  description: Amazon Athena API endpoint
+security:
+- sigv4: []
+tags:
+- name: Databases
+  description: Operations for listing databases in a data catalog
+paths:
+  /?Action=ListDatabases:
+    post:
+      operationId: listDatabases
+      summary: Amazon Athena List Databases
+      description: Lists the databases in the specified data catalog.
+      tags:
+      - Databases
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDatabasesInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  CatalogName: AwsDataCatalog
+                  MaxResults: 10
+      responses:
+        '200':
+          description: Databases listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatabasesOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    DatabaseList:
+                    - Name: my_database
+                      Description: Production database
+                    NextToken: ''
+  /?Action=GetDatabase:
+    post:
+      operationId: getDatabase
+      summary: Amazon Athena Get Database
+      description: Returns a database object for the specified database and data catalog.
+      tags:
+      - Databases
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDatabaseInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  CatalogName: AwsDataCatalog
+                  DatabaseName: my_database
+      responses:
+        '200':
+          description: Database retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDatabaseOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Database:
+                      Name: my_database
+                      Description: Production database
+                      Parameters:
+                        classification: parquet
+components:
+  schemas:
+    ListDatabasesOutput:
+      type: object
+      properties:
+        DatabaseList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Database'
+        NextToken:
+          type: string
+    GetDatabaseInput:
+      type: object
+      required:
+      - CatalogName
+      - DatabaseName
+      properties:
+        CatalogName:
+          type: string
+        DatabaseName:
+          type: string
+    ListDatabasesInput:
+      type: object
+      required:
+      - CatalogName
+      properties:
+        CatalogName:
+          type: string
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    GetDatabaseOutput:
+      type: object
+      properties:
+        Database:
+          $ref: '#/components/schemas/Database'
+    Database:
+      type: object
+      properties:
+        Name:
+          type: string
+        Description:
+          type: string
+        Parameters:
+          type: object
+          additionalProperties:
+            type: string
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4

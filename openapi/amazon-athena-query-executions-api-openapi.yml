@@ -1,0 +1,683 @@
+openapi: 3.1.0
+info:
+  title: Amazon Athena Data Catalogs Query Executions API
+  description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
+  version: '2017-05-18'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://athena.us-east-1.amazonaws.com
+  description: Amazon Athena API endpoint
+security:
+- sigv4: []
+tags:
+- name: Query Executions
+  description: Operations for running and managing SQL query executions
+paths:
+  /?Action=StartQueryExecution:
+    post:
+      operationId: startQueryExecution
+      summary: Amazon Athena Start Query Execution
+      description: Runs the SQL query statements contained in the query string. Requires you to have access to the workgroup in which the query ran.
+      tags:
+      - Query Executions
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartQueryExecutionInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  QueryString: SELECT * FROM my_table LIMIT 10
+                  QueryExecutionContext:
+                    Database: my_database
+                    Catalog: AwsDataCatalog
+                  ResultConfiguration:
+                    OutputLocation: s3://my-bucket/athena-results/
+                  WorkGroup: primary
+      responses:
+        '200':
+          description: Query execution started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartQueryExecutionOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    QueryExecutionId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  /?Action=StopQueryExecution:
+    post:
+      operationId: stopQueryExecution
+      summary: Amazon Athena Stop Query Execution
+      description: Stops a query execution. Requires you to have access to the workgroup in which the query ran.
+      tags:
+      - Query Executions
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopQueryExecutionInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  QueryExecutionId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+      responses:
+        '200':
+          description: Query execution stopped successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopQueryExecutionOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+  /?Action=GetQueryExecution:
+    post:
+      operationId: getQueryExecution
+      summary: Amazon Athena Get Query Execution
+      description: Returns information about a single execution of a query if you have access to the work group in which the query ran.
+      tags:
+      - Query Executions
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetQueryExecutionInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  QueryExecutionId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+      responses:
+        '200':
+          description: Query execution details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQueryExecutionOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    QueryExecution:
+                      QueryExecutionId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      Query: SELECT * FROM my_table LIMIT 10
+                      StatementType: DML
+                      Status:
+                        State: SUCCEEDED
+                        SubmissionDateTime: '2024-01-15T10:30:00Z'
+                        CompletionDateTime: '2024-01-15T10:30:05Z'
+                      WorkGroup: primary
+  /?Action=BatchGetQueryExecution:
+    post:
+      operationId: batchGetQueryExecution
+      summary: Amazon Athena Batch Get Query Execution
+      description: Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings.
+      tags:
+      - Query Executions
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetQueryExecutionInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  QueryExecutionIds:
+                  - a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                  - b2c3d4e5-f6a7-8901-bcde-f12345678901
+      responses:
+        '200':
+          description: Query executions retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetQueryExecutionOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    QueryExecutions:
+                    - QueryExecutionId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      Query: SELECT * FROM my_table
+                      Status:
+                        State: SUCCEEDED
+                    UnprocessedQueryExecutionIds: []
+  /?Action=ListQueryExecutions:
+    post:
+      operationId: listQueryExecutions
+      summary: Amazon Athena List Query Executions
+      description: Provides a list of available query execution IDs for the queries in the specified workgroup.
+      tags:
+      - Query Executions
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListQueryExecutionsInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  WorkGroup: primary
+                  MaxResults: 10
+      responses:
+        '200':
+          description: Query execution IDs listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListQueryExecutionsOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    QueryExecutionIds:
+                    - a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    NextToken: ''
+  /?Action=GetQueryResults:
+    post:
+      operationId: getQueryResults
+      summary: Amazon Athena Get Query Results
+      description: Streams the results of a single query execution specified by QueryExecutionId from the Athena query results location in Amazon S3.
+      tags:
+      - Query Executions
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetQueryResultsInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  QueryExecutionId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                  MaxResults: 100
+      responses:
+        '200':
+          description: Query results retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQueryResultsOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    ResultSet:
+                      Rows:
+                      - Data:
+                        - VarCharValue: column1
+                        - VarCharValue: column2
+                      - Data:
+                        - VarCharValue: value1
+                        - VarCharValue: value2
+                      ResultSetMetadata:
+                        ColumnInfo:
+                        - Name: column1
+                          Type: varchar
+                        - Name: column2
+                          Type: varchar
+                    NextToken: ''
+  /?Action=GetQueryRuntimeStatistics:
+    post:
+      operationId: getQueryRuntimeStatistics
+      summary: Amazon Athena Get Query Runtime Statistics
+      description: Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran.
+      tags:
+      - Query Executions
+      x-microcks-operation:
+        delay: 100
+        dispatcher: QUERY_MATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetQueryRuntimeStatisticsInput'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  QueryExecutionId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+      responses:
+        '200':
+          description: Query runtime statistics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQueryRuntimeStatisticsOutput'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    QueryRuntimeStatistics:
+                      Rows:
+                        InputRows: 1000
+                        InputBytes: 50000
+                        OutputRows: 100
+                        OutputBytes: 5000
+                      Timeline:
+                        QueryQueueTimeInMillis: 50
+                        QueryPlanningTimeInMillis: 100
+                        EngineExecutionTimeInMillis: 2000
+                        ServiceProcessingTimeInMillis: 50
+                        TotalExecutionTimeInMillis: 2200
+components:
+  schemas:
+    QueryRuntimeStatistics:
+      type: object
+      properties:
+        Timeline:
+          $ref: '#/components/schemas/QueryRuntimeStatisticsTimeline'
+        Rows:
+          $ref: '#/components/schemas/QueryRuntimeStatisticsRows'
+        OutputStage:
+          $ref: '#/components/schemas/QueryStage'
+    UnprocessedQueryExecutionId:
+      type: object
+      properties:
+        QueryExecutionId:
+          type: string
+        ErrorCode:
+          type: string
+        ErrorMessage:
+          type: string
+    QueryExecutionStatus:
+      type: object
+      properties:
+        State:
+          type: string
+          enum:
+          - QUEUED
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - CANCELLED
+        StateChangeReason:
+          type: string
+        SubmissionDateTime:
+          type: string
+          format: date-time
+        CompletionDateTime:
+          type: string
+          format: date-time
+        AthenaError:
+          $ref: '#/components/schemas/AthenaError'
+    QueryExecutionStatistics:
+      type: object
+      properties:
+        EngineExecutionTimeInMillis:
+          type: integer
+        DataScannedInBytes:
+          type: integer
+        DataManifestLocation:
+          type: string
+        TotalExecutionTimeInMillis:
+          type: integer
+        QueryQueueTimeInMillis:
+          type: integer
+        QueryPlanningTimeInMillis:
+          type: integer
+        ServiceProcessingTimeInMillis:
+          type: integer
+    StartQueryExecutionOutput:
+      type: object
+      properties:
+        QueryExecutionId:
+          type: string
+          description: The unique ID of the query that ran as a result of this request
+    EngineVersion:
+      type: object
+      properties:
+        SelectedEngineVersion:
+          type: string
+          description: The engine version requested by the user
+        EffectiveEngineVersion:
+          type: string
+          description: The engine version on which the query runs
+    QueryRuntimeStatisticsTimeline:
+      type: object
+      properties:
+        QueryQueueTimeInMillis:
+          type: integer
+        QueryPlanningTimeInMillis:
+          type: integer
+        EngineExecutionTimeInMillis:
+          type: integer
+        ServiceProcessingTimeInMillis:
+          type: integer
+        TotalExecutionTimeInMillis:
+          type: integer
+    BatchGetQueryExecutionInput:
+      type: object
+      required:
+      - QueryExecutionIds
+      properties:
+        QueryExecutionIds:
+          type: array
+          items:
+            type: string
+          description: An array of query execution IDs
+    QueryExecutionContext:
+      type: object
+      properties:
+        Database:
+          type: string
+          description: The name of the database used in the query execution
+        Catalog:
+          type: string
+          description: The name of the data catalog used in the query execution
+    QueryStagePlanNode:
+      type: object
+      properties:
+        Name:
+          type: string
+        Identifier:
+          type: string
+        Children:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryStagePlanNode'
+        RemoteSources:
+          type: array
+          items:
+            type: string
+    BatchGetQueryExecutionOutput:
+      type: object
+      properties:
+        QueryExecutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryExecution'
+        UnprocessedQueryExecutionIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/UnprocessedQueryExecutionId'
+    StopQueryExecutionInput:
+      type: object
+      required:
+      - QueryExecutionId
+      properties:
+        QueryExecutionId:
+          type: string
+          description: The unique ID of the query execution to stop
+    GetQueryExecutionInput:
+      type: object
+      required:
+      - QueryExecutionId
+      properties:
+        QueryExecutionId:
+          type: string
+          description: The unique ID of the query execution
+    GetQueryResultsInput:
+      type: object
+      required:
+      - QueryExecutionId
+      properties:
+        QueryExecutionId:
+          type: string
+          description: The unique ID of the query execution
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    GetQueryRuntimeStatisticsOutput:
+      type: object
+      properties:
+        QueryRuntimeStatistics:
+          $ref: '#/components/schemas/QueryRuntimeStatistics'
+    ColumnInfo:
+      type: object
+      properties:
+        CatalogName:
+          type: string
+        SchemaName:
+          type: string
+        TableName:
+          type: string
+        Name:
+          type: string
+        Label:
+          type: string
+        Type:
+          type: string
+        Precision:
+          type: integer
+        Scale:
+          type: integer
+        Nullable:
+          type: string
+          enum:
+          - NOT_NULL
+          - NULLABLE
+          - UNKNOWN
+        CaseSensitive:
+          type: boolean
+    AthenaError:
+      type: object
+      properties:
+        ErrorCategory:
+          type: integer
+          description: An integer that specifies the error category
+        ErrorType:
+          type: integer
+          description: An integer that specifies the error type
+        Retryable:
+          type: boolean
+          description: True if the query might succeed if resubmitted
+        ErrorMessage:
+          type: string
+          description: Contains a short description of the error that occurred
+    QueryStage:
+      type: object
+      properties:
+        StageId:
+          type: integer
+        State:
+          type: string
+        OutputBytes:
+          type: integer
+        OutputRows:
+          type: integer
+        InputBytes:
+          type: integer
+        InputRows:
+          type: integer
+        ExecutionTime:
+          type: integer
+        QueryStagePlan:
+          $ref: '#/components/schemas/QueryStagePlanNode'
+        SubStages:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryStage'
+    QueryRuntimeStatisticsRows:
+      type: object
+      properties:
+        InputRows:
+          type: integer
+        InputBytes:
+          type: integer
+        OutputRows:
+          type: integer
+        OutputBytes:
+          type: integer
+    ListQueryExecutionsInput:
+      type: object
+      properties:
+        NextToken:
+          type: string
+          description: A token generated by the Athena service that specifies where to continue pagination
+        MaxResults:
+          type: integer
+          description: The maximum number of query executions to return in this request
+        WorkGroup:
+          type: string
+          description: The name of the workgroup from which queries are being returned
+    StartQueryExecutionInput:
+      type: object
+      required:
+      - QueryString
+      properties:
+        QueryString:
+          type: string
+          description: The SQL query statements to be executed
+        QueryExecutionContext:
+          $ref: '#/components/schemas/QueryExecutionContext'
+        ResultConfiguration:
+          $ref: '#/components/schemas/ResultConfiguration'
+        WorkGroup:
+          type: string
+          description: The name of the workgroup in which the query is being started
+        ClientRequestToken:
+          type: string
+          description: A unique case-sensitive string used to ensure the request to create the query is idempotent
+    ResultSetMetadata:
+      type: object
+      properties:
+        ColumnInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnInfo'
+    ResultSet:
+      type: object
+      properties:
+        Rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Row'
+        ResultSetMetadata:
+          $ref: '#/components/schemas/ResultSetMetadata'
+    Datum:
+      type: object
+      properties:
+        VarCharValue:
+          type: string
+    ListQueryExecutionsOutput:
+      type: object
+      properties:
+        QueryExecutionIds:
+          type: array
+          items:
+            type: string
+        NextToken:
+          type: string
+    EncryptionConfiguration:
+      type: object
+      properties:
+        EncryptionOption:
+          type: string
+          enum:
+          - SSE_S3
+          - SSE_KMS
+          - CSE_KMS
+        KmsKey:
+          type: string
+    Row:
+      type: object
+      properties:
+        Data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Datum'
+    GetQueryRuntimeStatisticsInput:
+      type: object
+      required:
+      - QueryExecutionId
+      properties:
+        QueryExecutionId:
+          type: string
+    GetQueryResultsOutput:
+      type: object
+      properties:
+        UpdateCount:
+          type: integer
+          description: The number of rows inserted with a CREATE TABLE AS SELECT statement
+        ResultSet:
+          $ref: '#/components/schemas/ResultSet'
+        NextToken:
+          type: string
+    GetQueryExecutionOutput:
+      type: object
+      properties:
+        QueryExecution:
+          $ref: '#/components/schemas/QueryExecution'
+    StopQueryExecutionOutput:
+      type: object
+    QueryExecution:
+      type: object
+      properties:
+        QueryExecutionId:
+          type: string
+        Query:
+          type: string
+        StatementType:
+          type: string
+          enum:
+          - DDL
+          - DML
+          - UTILITY
+        ResultConfiguration:
+          $ref: '#/components/schemas/ResultConfiguration'
+        QueryExecutionContext:
+          $ref: '#/components/schemas/QueryExecutionContext'
+        Status:
+          $ref: '#/components/schemas/QueryExecutionStatus'
+        Statistics:
+          $ref: '#/components/schemas/QueryExecutionStatistics'
+        WorkGroup:
+          type: string
+        EngineVersion:
+          $ref: '#/components/schemas/EngineVersion'
+    ResultConfiguration:
+      type: object
+      properties:
+        OutputLocation:
+          type: string
+          description: The location in Amazon S3 where your query results are stored
+        EncryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+        ExpectedBucketOwner:
+          type: string
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4

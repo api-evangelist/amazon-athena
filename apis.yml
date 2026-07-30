@@ -4,7 +4,20 @@ description: >-
   Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL.
   Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-athena.png
 tags:
   - Amazon Athena
   - SQL
@@ -16,54 +29,326 @@ created: '2024-01-15'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: amazon-athena:amazon-athena-api
-    name: Amazon Athena API
-    description: >-
-      REST management API for Amazon Athena covering query executions, named queries, work groups, data catalogs,
-      databases, table metadata, and prepared statements.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
-    baseURL: https://athena.us-east-1.amazonaws.com
-    tags:
-      - Amazon Athena
-      - SQL
-      - Analytics
-      - Serverless
-      - AWS
-    properties:
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/openapi/amazon-athena-openapi.yml
-      - type: SpectralRules
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/rules/amazon-athena-spectral-rules.yml
-      - type: Vocabulary
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/vocabulary/amazon-athena-vocabulary.yaml
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-execution-schema.json
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-named-query-schema.json
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-schema.json
-      - type: JSONStructure
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-query-execution-structure.json
-      - type: JSONStructure
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-work-group-structure.json
-      - type: JSONLD
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-ld/amazon-athena-context.jsonld
-      - type: Examples
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-query-execution-example.json
-      - type: Examples
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
+- aid: amazon-athena:amazon-athena-data-catalogs-api
+  name: Amazon Athena Data Catalogs API
+  description: Operations for managing data catalogs
+  humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
+  baseURL: https://athena.us-east-1.amazonaws.com
+  tags:
+  - Data Catalogs
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-athena-data-catalogs-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/rules/amazon-athena-spectral-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/vocabulary/amazon-athena-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-execution-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-named-query-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-query-execution-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-work-group-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-ld/amazon-athena-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-query-execution-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
+- aid: amazon-athena:amazon-athena-databases-api
+  name: Amazon Athena Databases API
+  description: Operations for listing databases in a data catalog
+  humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
+  baseURL: https://athena.us-east-1.amazonaws.com
+  tags:
+  - Databases
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-athena-databases-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/rules/amazon-athena-spectral-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/vocabulary/amazon-athena-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-execution-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-named-query-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-query-execution-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-work-group-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-ld/amazon-athena-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-query-execution-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
+- aid: amazon-athena:amazon-athena-named-queries-api
+  name: Amazon Athena Named Queries API
+  description: Operations for creating and managing saved SQL queries
+  humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
+  baseURL: https://athena.us-east-1.amazonaws.com
+  tags:
+  - Named Queries
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-athena-named-queries-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/rules/amazon-athena-spectral-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/vocabulary/amazon-athena-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-execution-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-named-query-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-query-execution-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-work-group-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-ld/amazon-athena-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-query-execution-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
+- aid: amazon-athena:amazon-athena-prepared-statements-api
+  name: Amazon Athena Prepared Statements API
+  description: Operations for managing prepared SQL statements
+  humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
+  baseURL: https://athena.us-east-1.amazonaws.com
+  tags:
+  - Prepared Statements
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-athena-prepared-statements-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/rules/amazon-athena-spectral-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/vocabulary/amazon-athena-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-execution-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-named-query-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-query-execution-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-work-group-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-ld/amazon-athena-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-query-execution-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
+- aid: amazon-athena:amazon-athena-query-executions-api
+  name: Amazon Athena Query Executions API
+  description: Operations for running and managing SQL query executions
+  humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
+  baseURL: https://athena.us-east-1.amazonaws.com
+  tags:
+  - Query Executions
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-athena-query-executions-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/rules/amazon-athena-spectral-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/vocabulary/amazon-athena-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-execution-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-named-query-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-query-execution-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-work-group-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-ld/amazon-athena-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-query-execution-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
+- aid: amazon-athena:amazon-athena-table-metadata-api
+  name: Amazon Athena Table Metadata API
+  description: Operations for listing and getting table metadata
+  humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
+  baseURL: https://athena.us-east-1.amazonaws.com
+  tags:
+  - Table Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-athena-table-metadata-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/rules/amazon-athena-spectral-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/vocabulary/amazon-athena-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-execution-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-named-query-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-query-execution-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-work-group-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-ld/amazon-athena-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-query-execution-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
+- aid: amazon-athena:amazon-athena-tags-api
+  name: Amazon Athena Tags API
+  description: Operations for managing resource tags
+  humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
+  baseURL: https://athena.us-east-1.amazonaws.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-athena-tags-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/rules/amazon-athena-spectral-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/vocabulary/amazon-athena-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-execution-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-named-query-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-query-execution-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-work-group-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-ld/amazon-athena-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-query-execution-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
+- aid: amazon-athena:amazon-athena-work-groups-api
+  name: Amazon Athena Work Groups API
+  description: Operations for managing Athena work groups
+  humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
+  baseURL: https://athena.us-east-1.amazonaws.com
+  tags:
+  - Work Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-athena-work-groups-api-openapi.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/rules/amazon-athena-spectral-rules.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/vocabulary/amazon-athena-vocabulary.yaml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-query-execution-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-named-query-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-schema/athena-work-group-schema.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-query-execution-structure.json
+  - type: JSONStructure
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-structure/athena-work-group-structure.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/json-ld/amazon-athena-context.jsonld
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-query-execution-example.json
+  - type: Examples
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
 common:
   - type: AgenticAccess
     url: agentic-access/amazon-athena-agentic-access.yml

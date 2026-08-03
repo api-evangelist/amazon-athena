@@ -1,0 +1,28 @@
+{
+  "provider": "amazon-athena",
+  "sources": [
+    "amazon-athena-data-catalogs-api-openapi.yml",
+    "amazon-athena-databases-api-openapi.yml",
+    "amazon-athena-named-queries-api-openapi.yml",
+    "amazon-athena-prepared-statements-api-openapi.yml",
+    "amazon-athena-query-executions-api-openapi.yml",
+    "amazon-athena-table-metadata-api-openapi.yml",
+    "amazon-athena-tags-api-openapi.yml",
+    "amazon-athena-work-groups-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-athena-data-catalogs-api-openapi.yml",
+    "amazon-athena-databases-api-openapi.yml",
+    "amazon-athena-named-queries-api-openapi.yml",
+    "amazon-athena-prepared-statements-api-openapi.yml",
+    "amazon-athena-query-executions-api-openapi.yml",
+    "amazon-athena-table-metadata-api-openapi.yml",
+    "amazon-athena-tags-api-openapi.yml",
+    "amazon-athena-work-groups-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

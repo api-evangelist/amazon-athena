@@ -1,0 +1,569 @@
+{
+  "item": [
+    {
+      "id": "f057bdf8-44dd-4fe0-84c0-92a637f5b698",
+      "name": "Work Groups",
+      "description": {
+        "content": "Operations for managing Athena work groups",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5ad6df70-f01b-4386-976f-48539db149ea",
+          "name": "Amazon Athena Create Work Group",
+          "request": {
+            "name": "Amazon Athena Create Work Group",
+            "description": {
+              "content": "Creates a workgroup with the specified name. A workgroup can contain one or more named queries or scheduled queries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "CreateWorkGroup"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Name\": \"<string>\",\n  \"Configuration\": {\n    \"ResultConfiguration\": {\n      \"OutputLocation\": \"<string>\",\n      \"EncryptionConfiguration\": {\n        \"EncryptionOption\": \"<string>\",\n        \"KmsKey\": \"<string>\"\n      },\n      \"ExpectedBucketOwner\": \"<string>\"\n    },\n    \"EnforceWorkGroupConfiguration\": \"<boolean>\",\n    \"PublishCloudWatchMetricsEnabled\": \"<boolean>\",\n    \"BytesScannedCutoffPerQuery\": \"<integer>\",\n    \"RequesterPaysEnabled\": \"<boolean>\",\n    \"EngineVersion\": {\n      \"SelectedEngineVersion\": \"<string>\",\n      \"EffectiveEngineVersion\": \"<string>\"\n    }\n  },\n  \"Description\": \"<string>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "acb864a0-f8d9-4f72-84a9-e916d7d7ef3c",
+              "name": "Work group created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Name\": \"my-workgroup\",\n  \"Description\": \"Production workgroup\",\n  \"Configuration\": {\n    \"ResultConfiguration\": {\n      \"OutputLocation\": \"s3://my-bucket/workgroup-results/\"\n    },\n    \"EnforceWorkGroupConfiguration\": true,\n    \"PublishCloudWatchMetricsEnabled\": true\n  },\n  \"Tags\": [\n    {\n      \"Key\": \"Environment\",\n      \"Value\": \"Production\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80938bab-7df4-46d8-a92c-0540366626ea",
+          "name": "Amazon Athena Delete Work Group",
+          "request": {
+            "name": "Amazon Athena Delete Work Group",
+            "description": {
+              "content": "Deletes the workgroup with the specified name. The primary workgroup cannot be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "DeleteWorkGroup"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"WorkGroup\": \"<string>\",\n  \"RecursiveDeleteOption\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b03cd102-80f9-4a9a-b698-35454e2bfc62",
+              "name": "Work group deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"WorkGroup\": \"my-workgroup\",\n  \"RecursiveDeleteOption\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a49dd697-b161-4a97-be20-c3cfccdf58ee",
+          "name": "Amazon Athena Get Work Group",
+          "request": {
+            "name": "Amazon Athena Get Work Group",
+            "description": {
+              "content": "Returns information about the workgroup with the specified name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "GetWorkGroup"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"WorkGroup\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c31b692-8073-4a29-b58b-1c8b40c87d68",
+              "name": "Work group retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"WorkGroup\": \"primary\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"WorkGroup\": {\n    \"Name\": \"primary\",\n    \"Description\": \"Primary workgroup\",\n    \"State\": \"ENABLED\",\n    \"Configuration\": {\n      \"ResultConfiguration\": {\n        \"OutputLocation\": \"s3://my-bucket/results/\"\n      },\n      \"EnforceWorkGroupConfiguration\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d911968a-d815-4be5-8153-6eac35ebabe7",
+          "name": "Amazon Athena Update Work Group",
+          "request": {
+            "name": "Amazon Athena Update Work Group",
+            "description": {
+              "content": "Updates the workgroup with the specified name. The workgroup's name cannot be changed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "UpdateWorkGroup"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"WorkGroup\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"ConfigurationUpdates\": {\n    \"EnforceWorkGroupConfiguration\": \"<boolean>\",\n    \"ResultConfigurationUpdates\": {\n      \"OutputLocation\": \"<string>\",\n      \"RemoveOutputLocation\": \"<boolean>\",\n      \"EncryptionConfiguration\": {\n        \"EncryptionOption\": \"<string>\",\n        \"KmsKey\": \"<string>\"\n      },\n      \"RemoveEncryptionConfiguration\": \"<boolean>\",\n      \"ExpectedBucketOwner\": \"<string>\",\n      \"RemoveExpectedBucketOwner\": \"<boolean>\"\n    },\n    \"PublishCloudWatchMetricsEnabled\": \"<boolean>\",\n    \"BytesScannedCutoffPerQuery\": \"<integer>\",\n    \"RemoveBytesScannedCutoffPerQuery\": \"<boolean>\",\n    \"RequesterPaysEnabled\": \"<boolean>\",\n    \"EngineVersion\": {\n      \"SelectedEngineVersion\": \"<string>\",\n      \"EffectiveEngineVersion\": \"<string>\"\n    }\n  },\n  \"State\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "98a92ede-4330-4692-8a04-156df4bed314",
+              "name": "Work group updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"WorkGroup\": \"my-workgroup\",\n  \"Description\": \"Updated description\",\n  \"State\": \"ENABLED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "859c0ab5-82c6-4aea-8231-a802f88493aa",
+          "name": "Amazon Athena List Work Groups",
+          "request": {
+            "name": "Amazon Athena List Work Groups",
+            "description": {
+              "content": "Lists available workgroups for the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "ListWorkGroups"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dfe67e4d-c1a6-4d22-88d5-0f8517c69636",
+              "name": "Work groups listed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MaxResults\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"WorkGroups\": [\n    {\n      \"Name\": \"primary\",\n      \"State\": \"ENABLED\",\n      \"Description\": \"Primary workgroup\"\n    }\n  ],\n  \"NextToken\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://athena.us-east-1.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5eadf2df-80fe-4af1-84e2-c7a5b0c4ba94",
+    "name": "Amazon Athena Data Catalogs Work Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

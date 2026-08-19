@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Athena Data Catalogs Table Metadata API",
+    "version": "2017-05-18"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Table Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena List Table Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListTableMetadata",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the metadata for the tables in the specified data catalog database."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Table Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetTableMetadata",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns table metadata for the specified catalog, database, and table."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

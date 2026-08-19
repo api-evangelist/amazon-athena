@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Athena Data Catalogs Query Executions API",
+    "version": "2017-05-18"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Query Executions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena Start Query Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=StartQueryExecution",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs the SQL query statements contained in the query string. Requires you to have access to the workgroup in which the query ran."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Stop Query Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=StopQueryExecution",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stops a query execution. Requires you to have access to the workgroup in which the query ran."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Query Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetQueryExecution",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns information about a single execution of a query if you have access to the work group in which the query ran."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Batch Get Query Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=BatchGetQueryExecution",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena List Query Executions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListQueryExecutions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides a list of available query execution IDs for the queries in the specified workgroup."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Query Results",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetQueryResults",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Streams the results of a single query execution specified by QueryExecutionId from the Athena query results location in Amazon S3."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Query Runtime Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetQueryRuntimeStatistics",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

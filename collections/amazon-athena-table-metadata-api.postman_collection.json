@@ -1,0 +1,257 @@
+{
+  "item": [
+    {
+      "id": "9018a143-ea6b-4053-856b-e5524a5ad3bc",
+      "name": "Table Metadata",
+      "description": {
+        "content": "Operations for listing and getting table metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c137ef9a-99de-4072-8f5b-03deb1cc1d35",
+          "name": "Amazon Athena List Table Metadata",
+          "request": {
+            "name": "Amazon Athena List Table Metadata",
+            "description": {
+              "content": "Lists the metadata for the tables in the specified data catalog database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "ListTableMetadata"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"CatalogName\": \"<string>\",\n  \"DatabaseName\": \"<string>\",\n  \"Expression\": \"<string>\",\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e97ef9d-abf0-4aa9-917c-ee5a02c54c89",
+              "name": "Table metadata listed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CatalogName\": \"AwsDataCatalog\",\n  \"DatabaseName\": \"my_database\",\n  \"MaxResults\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TableMetadataList\": [\n    {\n      \"Name\": \"my_table\",\n      \"TableType\": \"EXTERNAL_TABLE\",\n      \"Columns\": [\n        {\n          \"Name\": \"id\",\n          \"Type\": \"int\"\n        },\n        {\n          \"Name\": \"name\",\n          \"Type\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"NextToken\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e11c8f97-502d-48c2-b260-9285f9969705",
+          "name": "Amazon Athena Get Table Metadata",
+          "request": {
+            "name": "Amazon Athena Get Table Metadata",
+            "description": {
+              "content": "Returns table metadata for the specified catalog, database, and table.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "Action",
+                  "value": "GetTableMetadata"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"CatalogName\": \"<string>\",\n  \"DatabaseName\": \"<string>\",\n  \"TableName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8cf621ec-14a3-4fed-a84d-0c366f87ea21",
+              "name": "Table metadata retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CatalogName\": \"AwsDataCatalog\",\n  \"DatabaseName\": \"my_database\",\n  \"TableName\": \"my_table\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TableMetadata\": {\n    \"Name\": \"my_table\",\n    \"TableType\": \"EXTERNAL_TABLE\",\n    \"Columns\": [\n      {\n        \"Name\": \"id\",\n        \"Type\": \"int\"\n      },\n      {\n        \"Name\": \"name\",\n        \"Type\": \"string\"\n      }\n    ],\n    \"Parameters\": {\n      \"classification\": \"parquet\",\n      \"location\": \"s3://my-bucket/my_table/\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://athena.us-east-1.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "be8284ee-7ced-4f18-9684-7c621eee2021",
+    "name": "Amazon Athena Data Catalogs Table Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

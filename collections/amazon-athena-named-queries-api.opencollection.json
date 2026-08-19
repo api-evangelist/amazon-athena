@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Athena Data Catalogs Named Queries API",
+    "version": "2017-05-18"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Named Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena Create Named Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=CreateNamedQuery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a named query in the specified workgroup. Requires that you have access to the workgroup."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Delete Named Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=DeleteNamedQuery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the named query if you have access to the workgroup in which the query was saved."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Named Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetNamedQuery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns information about a single query. Requires that you have access to the workgroup in which the query was saved."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena List Named Queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListNamedQueries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides a list of available query IDs only for queries saved in the specified workgroup."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Batch Get Named Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=BatchGetNamedQuery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

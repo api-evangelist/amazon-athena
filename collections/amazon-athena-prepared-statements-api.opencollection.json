@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Athena Data Catalogs Prepared Statements API",
+    "version": "2017-05-18"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prepared Statements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Athena Create Prepared Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=CreatePreparedStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a prepared statement for use with SQL queries in Athena."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Delete Prepared Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=DeletePreparedStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the prepared statement with the specified name from the specified workgroup."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena Get Prepared Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=GetPreparedStatement",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the prepared statement with the specified name from the specified workgroup."
+        },
+        {
+          "info": {
+            "name": "Amazon Athena List Prepared Statements",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://athena.us-east-1.amazonaws.com/?Action=ListPreparedStatements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the prepared statements in the specified workgroup."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

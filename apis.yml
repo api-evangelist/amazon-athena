@@ -315,6 +315,8 @@ apis:
   humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
   baseURL: https://athena.us-east-1.amazonaws.com
   tags:
+  - Workgroups
+  tags_raw:
   - Work Groups
   properties:
   - type: OpenAPI

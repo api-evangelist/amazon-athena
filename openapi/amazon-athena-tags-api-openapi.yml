@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Athena Data Catalogs Tags API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
@@ -125,6 +125,24 @@ paths:
                     NextToken: ''
 components:
   schemas:
+    Tag:
+      type: object
+      properties:
+        Key:
+          type: string
+          description: A tag key
+        Value:
+          type: string
+          description: A tag value
+    ListTagsForResourceOutput:
+      type: object
+      properties:
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        NextToken:
+          type: string
     TagResourceOutput:
       type: object
     UntagResourceOutput:
@@ -165,24 +183,6 @@ components:
           type: array
           items:
             type: string
-    Tag:
-      type: object
-      properties:
-        Key:
-          type: string
-          description: A tag key
-        Value:
-          type: string
-          description: A tag value
-    ListTagsForResourceOutput:
-      type: object
-      properties:
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        NextToken:
-          type: string
   securitySchemes:
     sigv4:
       type: apiKey

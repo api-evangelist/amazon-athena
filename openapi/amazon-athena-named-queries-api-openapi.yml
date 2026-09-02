@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Athena Data Catalogs Named Queries API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
@@ -203,45 +203,8 @@ paths:
                     UnprocessedNamedQueryIds: []
 components:
   schemas:
-    ListNamedQueriesOutput:
-      type: object
-      properties:
-        NamedQueryIds:
-          type: array
-          items:
-            type: string
-        NextToken:
-          type: string
     DeleteNamedQueryOutput:
       type: object
-    NamedQuery:
-      type: object
-      properties:
-        Name:
-          type: string
-        Description:
-          type: string
-        Database:
-          type: string
-        QueryString:
-          type: string
-        NamedQueryId:
-          type: string
-        WorkGroup:
-          type: string
-    GetNamedQueryInput:
-      type: object
-      required:
-      - NamedQueryId
-      properties:
-        NamedQueryId:
-          type: string
-    CreateNamedQueryOutput:
-      type: object
-      properties:
-        NamedQueryId:
-          type: string
-          description: The unique ID of the query
     ListNamedQueriesInput:
       type: object
       properties:
@@ -251,6 +214,35 @@ components:
           type: integer
         WorkGroup:
           type: string
+    ListNamedQueriesOutput:
+      type: object
+      properties:
+        NamedQueryIds:
+          type: array
+          items:
+            type: string
+        NextToken:
+          type: string
+    BatchGetNamedQueryOutput:
+      type: object
+      properties:
+        NamedQueries:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedQuery'
+        UnprocessedNamedQueryIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/UnprocessedNamedQueryId'
+    BatchGetNamedQueryInput:
+      type: object
+      required:
+      - NamedQueryIds
+      properties:
+        NamedQueryIds:
+          type: array
+          items:
+            type: string
     CreateNamedQueryInput:
       type: object
       required:
@@ -275,33 +267,33 @@ components:
         WorkGroup:
           type: string
           description: The name of the workgroup in which the named query is being created
-    DeleteNamedQueryInput:
+    GetNamedQueryOutput:
+      type: object
+      properties:
+        NamedQuery:
+          $ref: '#/components/schemas/NamedQuery'
+    GetNamedQueryInput:
       type: object
       required:
       - NamedQueryId
       properties:
         NamedQueryId:
           type: string
-    BatchGetNamedQueryInput:
-      type: object
-      required:
-      - NamedQueryIds
-      properties:
-        NamedQueryIds:
-          type: array
-          items:
-            type: string
-    BatchGetNamedQueryOutput:
+    NamedQuery:
       type: object
       properties:
-        NamedQueries:
-          type: array
-          items:
-            $ref: '#/components/schemas/NamedQuery'
-        UnprocessedNamedQueryIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/UnprocessedNamedQueryId'
+        Name:
+          type: string
+        Description:
+          type: string
+        Database:
+          type: string
+        QueryString:
+          type: string
+        NamedQueryId:
+          type: string
+        WorkGroup:
+          type: string
     UnprocessedNamedQueryId:
       type: object
       properties:
@@ -311,11 +303,19 @@ components:
           type: string
         ErrorMessage:
           type: string
-    GetNamedQueryOutput:
+    CreateNamedQueryOutput:
       type: object
       properties:
-        NamedQuery:
-          $ref: '#/components/schemas/NamedQuery'
+        NamedQueryId:
+          type: string
+          description: The unique ID of the query
+    DeleteNamedQueryInput:
+      type: object
+      required:
+      - NamedQueryId
+      properties:
+        NamedQueryId:
+          type: string
   securitySchemes:
     sigv4:
       type: apiKey

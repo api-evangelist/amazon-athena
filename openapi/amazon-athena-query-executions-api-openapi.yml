@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Athena Data Catalogs Query Executions API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
@@ -309,159 +309,23 @@ components:
           $ref: '#/components/schemas/QueryRuntimeStatisticsRows'
         OutputStage:
           $ref: '#/components/schemas/QueryStage'
-    UnprocessedQueryExecutionId:
+    GetQueryResultsOutput:
       type: object
       properties:
-        QueryExecutionId:
-          type: string
-        ErrorCode:
-          type: string
-        ErrorMessage:
-          type: string
-    QueryExecutionStatus:
-      type: object
-      properties:
-        State:
-          type: string
-          enum:
-          - QUEUED
-          - RUNNING
-          - SUCCEEDED
-          - FAILED
-          - CANCELLED
-        StateChangeReason:
-          type: string
-        SubmissionDateTime:
-          type: string
-          format: date-time
-        CompletionDateTime:
-          type: string
-          format: date-time
-        AthenaError:
-          $ref: '#/components/schemas/AthenaError'
-    QueryExecutionStatistics:
-      type: object
-      properties:
-        EngineExecutionTimeInMillis:
+        UpdateCount:
           type: integer
-        DataScannedInBytes:
-          type: integer
-        DataManifestLocation:
-          type: string
-        TotalExecutionTimeInMillis:
-          type: integer
-        QueryQueueTimeInMillis:
-          type: integer
-        QueryPlanningTimeInMillis:
-          type: integer
-        ServiceProcessingTimeInMillis:
-          type: integer
-    StartQueryExecutionOutput:
-      type: object
-      properties:
-        QueryExecutionId:
-          type: string
-          description: The unique ID of the query that ran as a result of this request
-    EngineVersion:
-      type: object
-      properties:
-        SelectedEngineVersion:
-          type: string
-          description: The engine version requested by the user
-        EffectiveEngineVersion:
-          type: string
-          description: The engine version on which the query runs
-    QueryRuntimeStatisticsTimeline:
-      type: object
-      properties:
-        QueryQueueTimeInMillis:
-          type: integer
-        QueryPlanningTimeInMillis:
-          type: integer
-        EngineExecutionTimeInMillis:
-          type: integer
-        ServiceProcessingTimeInMillis:
-          type: integer
-        TotalExecutionTimeInMillis:
-          type: integer
-    BatchGetQueryExecutionInput:
-      type: object
-      required:
-      - QueryExecutionIds
-      properties:
-        QueryExecutionIds:
-          type: array
-          items:
-            type: string
-          description: An array of query execution IDs
-    QueryExecutionContext:
-      type: object
-      properties:
-        Database:
-          type: string
-          description: The name of the database used in the query execution
-        Catalog:
-          type: string
-          description: The name of the data catalog used in the query execution
-    QueryStagePlanNode:
-      type: object
-      properties:
-        Name:
-          type: string
-        Identifier:
-          type: string
-        Children:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryStagePlanNode'
-        RemoteSources:
-          type: array
-          items:
-            type: string
-    BatchGetQueryExecutionOutput:
-      type: object
-      properties:
-        QueryExecutions:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryExecution'
-        UnprocessedQueryExecutionIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/UnprocessedQueryExecutionId'
-    StopQueryExecutionInput:
-      type: object
-      required:
-      - QueryExecutionId
-      properties:
-        QueryExecutionId:
-          type: string
-          description: The unique ID of the query execution to stop
-    GetQueryExecutionInput:
-      type: object
-      required:
-      - QueryExecutionId
-      properties:
-        QueryExecutionId:
-          type: string
-          description: The unique ID of the query execution
-    GetQueryResultsInput:
-      type: object
-      required:
-      - QueryExecutionId
-      properties:
-        QueryExecutionId:
-          type: string
-          description: The unique ID of the query execution
+          description: The number of rows inserted with a CREATE TABLE AS SELECT statement
+        ResultSet:
+          $ref: '#/components/schemas/ResultSet'
         NextToken:
           type: string
-        MaxResults:
-          type: integer
-    GetQueryRuntimeStatisticsOutput:
+    ResultSetMetadata:
       type: object
       properties:
-        QueryRuntimeStatistics:
-          $ref: '#/components/schemas/QueryRuntimeStatistics'
+        ColumnInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnInfo'
     ColumnInfo:
       type: object
       properties:
@@ -489,67 +353,6 @@ components:
           - UNKNOWN
         CaseSensitive:
           type: boolean
-    AthenaError:
-      type: object
-      properties:
-        ErrorCategory:
-          type: integer
-          description: An integer that specifies the error category
-        ErrorType:
-          type: integer
-          description: An integer that specifies the error type
-        Retryable:
-          type: boolean
-          description: True if the query might succeed if resubmitted
-        ErrorMessage:
-          type: string
-          description: Contains a short description of the error that occurred
-    QueryStage:
-      type: object
-      properties:
-        StageId:
-          type: integer
-        State:
-          type: string
-        OutputBytes:
-          type: integer
-        OutputRows:
-          type: integer
-        InputBytes:
-          type: integer
-        InputRows:
-          type: integer
-        ExecutionTime:
-          type: integer
-        QueryStagePlan:
-          $ref: '#/components/schemas/QueryStagePlanNode'
-        SubStages:
-          type: array
-          items:
-            $ref: '#/components/schemas/QueryStage'
-    QueryRuntimeStatisticsRows:
-      type: object
-      properties:
-        InputRows:
-          type: integer
-        InputBytes:
-          type: integer
-        OutputRows:
-          type: integer
-        OutputBytes:
-          type: integer
-    ListQueryExecutionsInput:
-      type: object
-      properties:
-        NextToken:
-          type: string
-          description: A token generated by the Athena service that specifies where to continue pagination
-        MaxResults:
-          type: integer
-          description: The maximum number of query executions to return in this request
-        WorkGroup:
-          type: string
-          description: The name of the workgroup from which queries are being returned
     StartQueryExecutionInput:
       type: object
       required:
@@ -568,78 +371,11 @@ components:
         ClientRequestToken:
           type: string
           description: A unique case-sensitive string used to ensure the request to create the query is idempotent
-    ResultSetMetadata:
+    GetQueryRuntimeStatisticsOutput:
       type: object
       properties:
-        ColumnInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/ColumnInfo'
-    ResultSet:
-      type: object
-      properties:
-        Rows:
-          type: array
-          items:
-            $ref: '#/components/schemas/Row'
-        ResultSetMetadata:
-          $ref: '#/components/schemas/ResultSetMetadata'
-    Datum:
-      type: object
-      properties:
-        VarCharValue:
-          type: string
-    ListQueryExecutionsOutput:
-      type: object
-      properties:
-        QueryExecutionIds:
-          type: array
-          items:
-            type: string
-        NextToken:
-          type: string
-    EncryptionConfiguration:
-      type: object
-      properties:
-        EncryptionOption:
-          type: string
-          enum:
-          - SSE_S3
-          - SSE_KMS
-          - CSE_KMS
-        KmsKey:
-          type: string
-    Row:
-      type: object
-      properties:
-        Data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Datum'
-    GetQueryRuntimeStatisticsInput:
-      type: object
-      required:
-      - QueryExecutionId
-      properties:
-        QueryExecutionId:
-          type: string
-    GetQueryResultsOutput:
-      type: object
-      properties:
-        UpdateCount:
-          type: integer
-          description: The number of rows inserted with a CREATE TABLE AS SELECT statement
-        ResultSet:
-          $ref: '#/components/schemas/ResultSet'
-        NextToken:
-          type: string
-    GetQueryExecutionOutput:
-      type: object
-      properties:
-        QueryExecution:
-          $ref: '#/components/schemas/QueryExecution'
-    StopQueryExecutionOutput:
-      type: object
+        QueryRuntimeStatistics:
+          $ref: '#/components/schemas/QueryRuntimeStatistics'
     QueryExecution:
       type: object
       properties:
@@ -665,6 +401,196 @@ components:
           type: string
         EngineVersion:
           $ref: '#/components/schemas/EngineVersion'
+    StartQueryExecutionOutput:
+      type: object
+      properties:
+        QueryExecutionId:
+          type: string
+          description: The unique ID of the query that ran as a result of this request
+    BatchGetQueryExecutionInput:
+      type: object
+      required:
+      - QueryExecutionIds
+      properties:
+        QueryExecutionIds:
+          type: array
+          items:
+            type: string
+          description: An array of query execution IDs
+    GetQueryExecutionInput:
+      type: object
+      required:
+      - QueryExecutionId
+      properties:
+        QueryExecutionId:
+          type: string
+          description: The unique ID of the query execution
+    StopQueryExecutionOutput:
+      type: object
+    Datum:
+      type: object
+      properties:
+        VarCharValue:
+          type: string
+    UnprocessedQueryExecutionId:
+      type: object
+      properties:
+        QueryExecutionId:
+          type: string
+        ErrorCode:
+          type: string
+        ErrorMessage:
+          type: string
+    ListQueryExecutionsOutput:
+      type: object
+      properties:
+        QueryExecutionIds:
+          type: array
+          items:
+            type: string
+        NextToken:
+          type: string
+    AthenaError:
+      type: object
+      properties:
+        ErrorCategory:
+          type: integer
+          description: An integer that specifies the error category
+        ErrorType:
+          type: integer
+          description: An integer that specifies the error type
+        Retryable:
+          type: boolean
+          description: True if the query might succeed if resubmitted
+        ErrorMessage:
+          type: string
+          description: Contains a short description of the error that occurred
+    EngineVersion:
+      type: object
+      properties:
+        SelectedEngineVersion:
+          type: string
+          description: The engine version requested by the user
+        EffectiveEngineVersion:
+          type: string
+          description: The engine version on which the query runs
+    ResultSet:
+      type: object
+      properties:
+        Rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Row'
+        ResultSetMetadata:
+          $ref: '#/components/schemas/ResultSetMetadata'
+    EncryptionConfiguration:
+      type: object
+      properties:
+        EncryptionOption:
+          type: string
+          enum:
+          - SSE_S3
+          - SSE_KMS
+          - CSE_KMS
+        KmsKey:
+          type: string
+    QueryStagePlanNode:
+      type: object
+      properties:
+        Name:
+          type: string
+        Identifier:
+          type: string
+        Children:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryStagePlanNode'
+        RemoteSources:
+          type: array
+          items:
+            type: string
+    QueryRuntimeStatisticsRows:
+      type: object
+      properties:
+        InputRows:
+          type: integer
+        InputBytes:
+          type: integer
+        OutputRows:
+          type: integer
+        OutputBytes:
+          type: integer
+    Row:
+      type: object
+      properties:
+        Data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Datum'
+    QueryStage:
+      type: object
+      properties:
+        StageId:
+          type: integer
+        State:
+          type: string
+        OutputBytes:
+          type: integer
+        OutputRows:
+          type: integer
+        InputBytes:
+          type: integer
+        InputRows:
+          type: integer
+        ExecutionTime:
+          type: integer
+        QueryStagePlan:
+          $ref: '#/components/schemas/QueryStagePlanNode'
+        SubStages:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryStage'
+    QueryExecutionStatistics:
+      type: object
+      properties:
+        EngineExecutionTimeInMillis:
+          type: integer
+        DataScannedInBytes:
+          type: integer
+        DataManifestLocation:
+          type: string
+        TotalExecutionTimeInMillis:
+          type: integer
+        QueryQueueTimeInMillis:
+          type: integer
+        QueryPlanningTimeInMillis:
+          type: integer
+        ServiceProcessingTimeInMillis:
+          type: integer
+    ListQueryExecutionsInput:
+      type: object
+      properties:
+        NextToken:
+          type: string
+          description: A token generated by the Athena service that specifies where to continue pagination
+        MaxResults:
+          type: integer
+          description: The maximum number of query executions to return in this request
+        WorkGroup:
+          type: string
+          description: The name of the workgroup from which queries are being returned
+    GetQueryResultsInput:
+      type: object
+      required:
+      - QueryExecutionId
+      properties:
+        QueryExecutionId:
+          type: string
+          description: The unique ID of the query execution
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
     ResultConfiguration:
       type: object
       properties:
@@ -674,6 +600,80 @@ components:
         EncryptionConfiguration:
           $ref: '#/components/schemas/EncryptionConfiguration'
         ExpectedBucketOwner:
+          type: string
+    QueryExecutionStatus:
+      type: object
+      properties:
+        State:
+          type: string
+          enum:
+          - QUEUED
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - CANCELLED
+        StateChangeReason:
+          type: string
+        SubmissionDateTime:
+          type: string
+          format: date-time
+        CompletionDateTime:
+          type: string
+          format: date-time
+        AthenaError:
+          $ref: '#/components/schemas/AthenaError'
+    GetQueryExecutionOutput:
+      type: object
+      properties:
+        QueryExecution:
+          $ref: '#/components/schemas/QueryExecution'
+    StopQueryExecutionInput:
+      type: object
+      required:
+      - QueryExecutionId
+      properties:
+        QueryExecutionId:
+          type: string
+          description: The unique ID of the query execution to stop
+    QueryExecutionContext:
+      type: object
+      properties:
+        Database:
+          type: string
+          description: The name of the database used in the query execution
+        Catalog:
+          type: string
+          description: The name of the data catalog used in the query execution
+    QueryRuntimeStatisticsTimeline:
+      type: object
+      properties:
+        QueryQueueTimeInMillis:
+          type: integer
+        QueryPlanningTimeInMillis:
+          type: integer
+        EngineExecutionTimeInMillis:
+          type: integer
+        ServiceProcessingTimeInMillis:
+          type: integer
+        TotalExecutionTimeInMillis:
+          type: integer
+    BatchGetQueryExecutionOutput:
+      type: object
+      properties:
+        QueryExecutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryExecution'
+        UnprocessedQueryExecutionIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/UnprocessedQueryExecutionId'
+    GetQueryRuntimeStatisticsInput:
+      type: object
+      required:
+      - QueryExecutionId
+      properties:
+        QueryExecutionId:
           type: string
   securitySchemes:
     sigv4:

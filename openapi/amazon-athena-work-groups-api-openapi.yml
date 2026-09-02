@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Athena Data Catalogs Work Groups API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
@@ -222,6 +222,71 @@ components:
         CreationTime:
           type: string
           format: date-time
+    CreateWorkGroupInput:
+      type: object
+      required:
+      - Name
+      properties:
+        Name:
+          type: string
+          description: The workgroup name
+        Configuration:
+          $ref: '#/components/schemas/WorkGroupConfiguration'
+        Description:
+          type: string
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    DeleteWorkGroupOutput:
+      type: object
+    GetWorkGroupInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+    Tag:
+      type: object
+      properties:
+        Key:
+          type: string
+          description: A tag key
+        Value:
+          type: string
+          description: A tag value
+    ListWorkGroupsInput:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    WorkGroupSummary:
+      type: object
+      properties:
+        Name:
+          type: string
+        State:
+          type: string
+        Description:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        EngineVersion:
+          $ref: '#/components/schemas/EngineVersion'
+    DeleteWorkGroupInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+        RecursiveDeleteOption:
+          type: boolean
+          description: The option to delete the workgroup and its contents even if the workgroup contains any named queries or query executions
     EngineVersion:
       type: object
       properties:
@@ -231,30 +296,44 @@ components:
         EffectiveEngineVersion:
           type: string
           description: The engine version on which the query runs
-    GetWorkGroupInput:
+    ListWorkGroupsOutput:
+      type: object
+      properties:
+        WorkGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkGroupSummary'
+        NextToken:
+          type: string
+    EncryptionConfiguration:
+      type: object
+      properties:
+        EncryptionOption:
+          type: string
+          enum:
+          - SSE_S3
+          - SSE_KMS
+          - CSE_KMS
+        KmsKey:
+          type: string
+    UpdateWorkGroupOutput:
+      type: object
+    UpdateWorkGroupInput:
       type: object
       required:
       - WorkGroup
       properties:
         WorkGroup:
           type: string
-    ResultConfigurationUpdates:
-      type: object
-      properties:
-        OutputLocation:
+        Description:
           type: string
-        RemoveOutputLocation:
-          type: boolean
-        EncryptionConfiguration:
-          $ref: '#/components/schemas/EncryptionConfiguration'
-        RemoveEncryptionConfiguration:
-          type: boolean
-        ExpectedBucketOwner:
+        ConfigurationUpdates:
+          $ref: '#/components/schemas/WorkGroupConfigurationUpdates'
+        State:
           type: string
-        RemoveExpectedBucketOwner:
-          type: boolean
-    DeleteWorkGroupOutput:
-      type: object
+          enum:
+          - ENABLED
+          - DISABLED
     WorkGroupConfigurationUpdates:
       type: object
       properties:
@@ -272,83 +351,31 @@ components:
           type: boolean
         EngineVersion:
           $ref: '#/components/schemas/EngineVersion'
-    GetWorkGroupOutput:
+    ResultConfigurationUpdates:
       type: object
       properties:
-        WorkGroup:
-          $ref: '#/components/schemas/WorkGroup'
-    DeleteWorkGroupInput:
-      type: object
-      required:
-      - WorkGroup
-      properties:
-        WorkGroup:
+        OutputLocation:
           type: string
-        RecursiveDeleteOption:
+        RemoveOutputLocation:
           type: boolean
-          description: The option to delete the workgroup and its contents even if the workgroup contains any named queries or query executions
-    ListWorkGroupsInput:
+        EncryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+        RemoveEncryptionConfiguration:
+          type: boolean
+        ExpectedBucketOwner:
+          type: string
+        RemoveExpectedBucketOwner:
+          type: boolean
+    ResultConfiguration:
       type: object
       properties:
-        NextToken:
+        OutputLocation:
           type: string
-        MaxResults:
-          type: integer
-    UpdateWorkGroupInput:
-      type: object
-      required:
-      - WorkGroup
-      properties:
-        WorkGroup:
+          description: The location in Amazon S3 where your query results are stored
+        EncryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+        ExpectedBucketOwner:
           type: string
-        Description:
-          type: string
-        ConfigurationUpdates:
-          $ref: '#/components/schemas/WorkGroupConfigurationUpdates'
-        State:
-          type: string
-          enum:
-          - ENABLED
-          - DISABLED
-    WorkGroupSummary:
-      type: object
-      properties:
-        Name:
-          type: string
-        State:
-          type: string
-        Description:
-          type: string
-        CreationTime:
-          type: string
-          format: date-time
-        EngineVersion:
-          $ref: '#/components/schemas/EngineVersion'
-    ListWorkGroupsOutput:
-      type: object
-      properties:
-        WorkGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkGroupSummary'
-        NextToken:
-          type: string
-    CreateWorkGroupInput:
-      type: object
-      required:
-      - Name
-      properties:
-        Name:
-          type: string
-          description: The workgroup name
-        Configuration:
-          $ref: '#/components/schemas/WorkGroupConfiguration'
-        Description:
-          type: string
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
     WorkGroupConfiguration:
       type: object
       properties:
@@ -364,40 +391,13 @@ components:
           type: boolean
         EngineVersion:
           $ref: '#/components/schemas/EngineVersion'
-    UpdateWorkGroupOutput:
-      type: object
-    EncryptionConfiguration:
+    GetWorkGroupOutput:
       type: object
       properties:
-        EncryptionOption:
-          type: string
-          enum:
-          - SSE_S3
-          - SSE_KMS
-          - CSE_KMS
-        KmsKey:
-          type: string
+        WorkGroup:
+          $ref: '#/components/schemas/WorkGroup'
     CreateWorkGroupOutput:
       type: object
-    ResultConfiguration:
-      type: object
-      properties:
-        OutputLocation:
-          type: string
-          description: The location in Amazon S3 where your query results are stored
-        EncryptionConfiguration:
-          $ref: '#/components/schemas/EncryptionConfiguration'
-        ExpectedBucketOwner:
-          type: string
-    Tag:
-      type: object
-      properties:
-        Key:
-          type: string
-          description: A tag key
-        Value:
-          type: string
-          description: A tag value
   securitySchemes:
     sigv4:
       type: apiKey

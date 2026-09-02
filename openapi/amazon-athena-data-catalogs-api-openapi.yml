@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Athena Data Catalogs API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
@@ -165,44 +165,6 @@ paths:
                     NextToken: ''
 components:
   schemas:
-    GetDataCatalogOutput:
-      type: object
-      properties:
-        DataCatalog:
-          $ref: '#/components/schemas/DataCatalog'
-    ListDataCatalogsInput:
-      type: object
-      properties:
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
-    DataCatalog:
-      type: object
-      properties:
-        Name:
-          type: string
-        Description:
-          type: string
-        Type:
-          type: string
-          enum:
-          - LAMBDA
-          - GLUE
-          - HIVE
-        Parameters:
-          type: object
-          additionalProperties:
-            type: string
-    CreateDataCatalogOutput:
-      type: object
-    DeleteDataCatalogInput:
-      type: object
-      required:
-      - Name
-      properties:
-        Name:
-          type: string
     CreateDataCatalogInput:
       type: object
       required:
@@ -229,6 +191,71 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    CreateDataCatalogOutput:
+      type: object
+    Tag:
+      type: object
+      properties:
+        Key:
+          type: string
+          description: A tag key
+        Value:
+          type: string
+          description: A tag value
+    DeleteDataCatalogOutput:
+      type: object
+    ListDataCatalogsOutput:
+      type: object
+      properties:
+        DataCatalogsSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataCatalogSummary'
+        NextToken:
+          type: string
+    DataCatalog:
+      type: object
+      properties:
+        Name:
+          type: string
+        Description:
+          type: string
+        Type:
+          type: string
+          enum:
+          - LAMBDA
+          - GLUE
+          - HIVE
+        Parameters:
+          type: object
+          additionalProperties:
+            type: string
+    GetDataCatalogInput:
+      type: object
+      required:
+      - Name
+      properties:
+        Name:
+          type: string
+    ListDataCatalogsInput:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    DeleteDataCatalogInput:
+      type: object
+      required:
+      - Name
+      properties:
+        Name:
+          type: string
+    GetDataCatalogOutput:
+      type: object
+      properties:
+        DataCatalog:
+          $ref: '#/components/schemas/DataCatalog'
     DataCatalogSummary:
       type: object
       properties:
@@ -240,33 +267,6 @@ components:
           - LAMBDA
           - GLUE
           - HIVE
-    GetDataCatalogInput:
-      type: object
-      required:
-      - Name
-      properties:
-        Name:
-          type: string
-    ListDataCatalogsOutput:
-      type: object
-      properties:
-        DataCatalogsSummary:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataCatalogSummary'
-        NextToken:
-          type: string
-    DeleteDataCatalogOutput:
-      type: object
-    Tag:
-      type: object
-      properties:
-        Key:
-          type: string
-          description: A tag key
-        Value:
-          type: string
-          description: A tag value
   securitySchemes:
     sigv4:
       type: apiKey

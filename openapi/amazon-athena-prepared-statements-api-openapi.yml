@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Athena Data Catalogs Prepared Statements API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
@@ -163,6 +163,54 @@ paths:
                     NextToken: ''
 components:
   schemas:
+    CreatePreparedStatementOutput:
+      type: object
+    PreparedStatement:
+      type: object
+      properties:
+        StatementName:
+          type: string
+        QueryStatement:
+          type: string
+        WorkGroupName:
+          type: string
+        Description:
+          type: string
+        LastModifiedTime:
+          type: string
+          format: date-time
+    DeletePreparedStatementInput:
+      type: object
+      required:
+      - StatementName
+      - WorkGroup
+      properties:
+        StatementName:
+          type: string
+        WorkGroup:
+          type: string
+    PreparedStatementSummary:
+      type: object
+      properties:
+        StatementName:
+          type: string
+        LastModifiedTime:
+          type: string
+          format: date-time
+    ListPreparedStatementsOutput:
+      type: object
+      properties:
+        PreparedStatements:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreparedStatementSummary'
+        NextToken:
+          type: string
+    GetPreparedStatementOutput:
+      type: object
+      properties:
+        PreparedStatement:
+          $ref: '#/components/schemas/PreparedStatement'
     ListPreparedStatementsInput:
       type: object
       required:
@@ -174,7 +222,7 @@ components:
           type: string
         MaxResults:
           type: integer
-    DeletePreparedStatementInput:
+    GetPreparedStatementInput:
       type: object
       required:
       - StatementName
@@ -202,56 +250,8 @@ components:
           description: The query string for the prepared statement
         Description:
           type: string
-    CreatePreparedStatementOutput:
-      type: object
-    GetPreparedStatementOutput:
-      type: object
-      properties:
-        PreparedStatement:
-          $ref: '#/components/schemas/PreparedStatement'
-    PreparedStatementSummary:
-      type: object
-      properties:
-        StatementName:
-          type: string
-        LastModifiedTime:
-          type: string
-          format: date-time
-    GetPreparedStatementInput:
-      type: object
-      required:
-      - StatementName
-      - WorkGroup
-      properties:
-        StatementName:
-          type: string
-        WorkGroup:
-          type: string
     DeletePreparedStatementOutput:
       type: object
-    ListPreparedStatementsOutput:
-      type: object
-      properties:
-        PreparedStatements:
-          type: array
-          items:
-            $ref: '#/components/schemas/PreparedStatementSummary'
-        NextToken:
-          type: string
-    PreparedStatement:
-      type: object
-      properties:
-        StatementName:
-          type: string
-        QueryStatement:
-          type: string
-        WorkGroupName:
-          type: string
-        Description:
-          type: string
-        LastModifiedTime:
-          type: string
-          format: date-time
   securitySchemes:
     sigv4:
       type: apiKey

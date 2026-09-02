@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Athena Data Catalogs Table Metadata API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
@@ -108,6 +108,32 @@ paths:
                         location: s3://my-bucket/my_table/
 components:
   schemas:
+    ListTableMetadataInput:
+      type: object
+      required:
+      - CatalogName
+      - DatabaseName
+      properties:
+        CatalogName:
+          type: string
+        DatabaseName:
+          type: string
+        Expression:
+          type: string
+          description: A regex filter that pattern-matches table names
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    Column:
+      type: object
+      properties:
+        Name:
+          type: string
+        Type:
+          type: string
+        Comment:
+          type: string
     GetTableMetadataInput:
       type: object
       required:
@@ -121,11 +147,15 @@ components:
           type: string
         TableName:
           type: string
-    GetTableMetadataOutput:
+    ListTableMetadataOutput:
       type: object
       properties:
-        TableMetadata:
-          $ref: '#/components/schemas/TableMetadata'
+        TableMetadataList:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableMetadata'
+        NextToken:
+          type: string
     TableMetadata:
       type: object
       properties:
@@ -151,41 +181,11 @@ components:
           type: object
           additionalProperties:
             type: string
-    Column:
+    GetTableMetadataOutput:
       type: object
       properties:
-        Name:
-          type: string
-        Type:
-          type: string
-        Comment:
-          type: string
-    ListTableMetadataInput:
-      type: object
-      required:
-      - CatalogName
-      - DatabaseName
-      properties:
-        CatalogName:
-          type: string
-        DatabaseName:
-          type: string
-        Expression:
-          type: string
-          description: A regex filter that pattern-matches table names
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
-    ListTableMetadataOutput:
-      type: object
-      properties:
-        TableMetadataList:
-          type: array
-          items:
-            $ref: '#/components/schemas/TableMetadata'
-        NextToken:
-          type: string
+        TableMetadata:
+          $ref: '#/components/schemas/TableMetadata'
   securitySchemes:
     sigv4:
       type: apiKey

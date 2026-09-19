@@ -77,6 +77,8 @@ apis:
   humanURL: https://docs.aws.amazon.com/athena/latest/APIReference/Welcome.html
   baseURL: https://athena.us-east-1.amazonaws.com
   tags:
+  - Database
+  tags_raw:
   - Databases
   properties:
   - type: OpenAPI

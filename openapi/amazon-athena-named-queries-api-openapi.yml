@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Athena Data Catalogs Named Queries API
+  title: Amazon Athena Named Queries API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
   version: '2017-05-18'
   contact:
@@ -203,17 +203,6 @@ paths:
                     UnprocessedNamedQueryIds: []
 components:
   schemas:
-    DeleteNamedQueryOutput:
-      type: object
-    ListNamedQueriesInput:
-      type: object
-      properties:
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
-        WorkGroup:
-          type: string
     ListNamedQueriesOutput:
       type: object
       properties:
@@ -223,26 +212,6 @@ components:
             type: string
         NextToken:
           type: string
-    BatchGetNamedQueryOutput:
-      type: object
-      properties:
-        NamedQueries:
-          type: array
-          items:
-            $ref: '#/components/schemas/NamedQuery'
-        UnprocessedNamedQueryIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/UnprocessedNamedQueryId'
-    BatchGetNamedQueryInput:
-      type: object
-      required:
-      - NamedQueryIds
-      properties:
-        NamedQueryIds:
-          type: array
-          items:
-            type: string
     CreateNamedQueryInput:
       type: object
       required:
@@ -272,13 +241,6 @@ components:
       properties:
         NamedQuery:
           $ref: '#/components/schemas/NamedQuery'
-    GetNamedQueryInput:
-      type: object
-      required:
-      - NamedQueryId
-      properties:
-        NamedQueryId:
-          type: string
     NamedQuery:
       type: object
       properties:
@@ -294,6 +256,31 @@ components:
           type: string
         WorkGroup:
           type: string
+    DeleteNamedQueryOutput:
+      type: object
+    ListNamedQueriesInput:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+        WorkGroup:
+          type: string
+    GetNamedQueryInput:
+      type: object
+      required:
+      - NamedQueryId
+      properties:
+        NamedQueryId:
+          type: string
+    DeleteNamedQueryInput:
+      type: object
+      required:
+      - NamedQueryId
+      properties:
+        NamedQueryId:
+          type: string
     UnprocessedNamedQueryId:
       type: object
       properties:
@@ -303,19 +290,32 @@ components:
           type: string
         ErrorMessage:
           type: string
+    BatchGetNamedQueryOutput:
+      type: object
+      properties:
+        NamedQueries:
+          type: array
+          items:
+            $ref: '#/components/schemas/NamedQuery'
+        UnprocessedNamedQueryIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/UnprocessedNamedQueryId'
+    BatchGetNamedQueryInput:
+      type: object
+      required:
+      - NamedQueryIds
+      properties:
+        NamedQueryIds:
+          type: array
+          items:
+            type: string
     CreateNamedQueryOutput:
       type: object
       properties:
         NamedQueryId:
           type: string
           description: The unique ID of the query
-    DeleteNamedQueryInput:
-      type: object
-      required:
-      - NamedQueryId
-      properties:
-        NamedQueryId:
-          type: string
   securitySchemes:
     sigv4:
       type: apiKey

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Athena Data Catalogs Tags API
+  title: Amazon Athena Tags API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
   version: '2017-05-18'
   contact:
@@ -125,28 +125,31 @@ paths:
                     NextToken: ''
 components:
   schemas:
-    Tag:
-      type: object
-      properties:
-        Key:
-          type: string
-          description: A tag key
-        Value:
-          type: string
-          description: A tag value
-    ListTagsForResourceOutput:
-      type: object
-      properties:
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        NextToken:
-          type: string
     TagResourceOutput:
       type: object
-    UntagResourceOutput:
+    UntagResourceInput:
       type: object
+      required:
+      - ResourceARN
+      - TagKeys
+      properties:
+        ResourceARN:
+          type: string
+        TagKeys:
+          type: array
+          items:
+            type: string
+    ListTagsForResourceInput:
+      type: object
+      required:
+      - ResourceARN
+      properties:
+        ResourceARN:
+          type: string
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
     TagResourceInput:
       type: object
       required:
@@ -160,29 +163,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    ListTagsForResourceInput:
+    ListTagsForResourceOutput:
       type: object
-      required:
-      - ResourceARN
       properties:
-        ResourceARN:
-          type: string
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
-    UntagResourceInput:
-      type: object
-      required:
-      - ResourceARN
-      - TagKeys
-      properties:
-        ResourceARN:
-          type: string
-        TagKeys:
+        Tags:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Tag'
+        NextToken:
+          type: string
+    UntagResourceOutput:
+      type: object
+    Tag:
+      type: object
+      properties:
+        Key:
+          type: string
+          description: A tag key
+        Value:
+          type: string
+          description: A tag value
   securitySchemes:
     sigv4:
       type: apiKey

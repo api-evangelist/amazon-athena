@@ -1,14 +1,7 @@
 {
   "provider": "amazon-athena",
   "sources": [
-    "amazon-athena-data-catalogs-api-openapi.yml",
-    "amazon-athena-databases-api-openapi.yml",
-    "amazon-athena-named-queries-api-openapi.yml",
-    "amazon-athena-prepared-statements-api-openapi.yml",
-    "amazon-athena-query-executions-api-openapi.yml",
-    "amazon-athena-table-metadata-api-openapi.yml",
-    "amazon-athena-tags-api-openapi.yml",
-    "amazon-athena-work-groups-api-openapi.yml"
+    "_original/amazon-athena-openapi.yml"
   ],
   "outputs": [
     "amazon-athena-data-catalogs-api-openapi.yml",
@@ -24,7 +17,18 @@
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "amazon-athena-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "amazon-athena-data-catalogs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-athena-databases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-athena-named-queries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-athena-prepared-statements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-athena-query-executions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-athena-table-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-athena-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-athena-work-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

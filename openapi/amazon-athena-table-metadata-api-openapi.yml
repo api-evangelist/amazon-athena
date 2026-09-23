@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Athena Data Catalogs Table Metadata API
+  title: Amazon Athena Table Metadata API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
   version: '2017-05-18'
   contact:
@@ -125,37 +125,11 @@ components:
           type: string
         MaxResults:
           type: integer
-    Column:
+    GetTableMetadataOutput:
       type: object
       properties:
-        Name:
-          type: string
-        Type:
-          type: string
-        Comment:
-          type: string
-    GetTableMetadataInput:
-      type: object
-      required:
-      - CatalogName
-      - DatabaseName
-      - TableName
-      properties:
-        CatalogName:
-          type: string
-        DatabaseName:
-          type: string
-        TableName:
-          type: string
-    ListTableMetadataOutput:
-      type: object
-      properties:
-        TableMetadataList:
-          type: array
-          items:
-            $ref: '#/components/schemas/TableMetadata'
-        NextToken:
-          type: string
+        TableMetadata:
+          $ref: '#/components/schemas/TableMetadata'
     TableMetadata:
       type: object
       properties:
@@ -181,11 +155,37 @@ components:
           type: object
           additionalProperties:
             type: string
-    GetTableMetadataOutput:
+    GetTableMetadataInput:
+      type: object
+      required:
+      - CatalogName
+      - DatabaseName
+      - TableName
+      properties:
+        CatalogName:
+          type: string
+        DatabaseName:
+          type: string
+        TableName:
+          type: string
+    ListTableMetadataOutput:
       type: object
       properties:
-        TableMetadata:
-          $ref: '#/components/schemas/TableMetadata'
+        TableMetadataList:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableMetadata'
+        NextToken:
+          type: string
+    Column:
+      type: object
+      properties:
+        Name:
+          type: string
+        Type:
+          type: string
+        Comment:
+          type: string
   securitySchemes:
     sigv4:
       type: apiKey

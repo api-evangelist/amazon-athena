@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Athena Data Catalogs Databases API
+  title: Amazon Athena Databases API
   description: Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
   version: '2017-05-18'
   contact:
@@ -95,11 +95,33 @@ paths:
                         classification: parquet
 components:
   schemas:
+    Database:
+      type: object
+      properties:
+        Name:
+          type: string
+        Description:
+          type: string
+        Parameters:
+          type: object
+          additionalProperties:
+            type: string
     GetDatabaseOutput:
       type: object
       properties:
         Database:
           $ref: '#/components/schemas/Database'
+    ListDatabasesInput:
+      type: object
+      required:
+      - CatalogName
+      properties:
+        CatalogName:
+          type: string
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
     GetDatabaseInput:
       type: object
       required:
@@ -119,28 +141,6 @@ components:
             $ref: '#/components/schemas/Database'
         NextToken:
           type: string
-    ListDatabasesInput:
-      type: object
-      required:
-      - CatalogName
-      properties:
-        CatalogName:
-          type: string
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
-    Database:
-      type: object
-      properties:
-        Name:
-          type: string
-        Description:
-          type: string
-        Parameters:
-          type: object
-          additionalProperties:
-            type: string
   securitySchemes:
     sigv4:
       type: apiKey

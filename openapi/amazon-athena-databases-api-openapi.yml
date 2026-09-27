@@ -95,17 +95,6 @@ paths:
                         classification: parquet
 components:
   schemas:
-    Database:
-      type: object
-      properties:
-        Name:
-          type: string
-        Description:
-          type: string
-        Parameters:
-          type: object
-          additionalProperties:
-            type: string
     GetDatabaseOutput:
       type: object
       properties:
@@ -122,6 +111,26 @@ components:
           type: string
         MaxResults:
           type: integer
+    ListDatabasesOutput:
+      type: object
+      properties:
+        DatabaseList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Database'
+        NextToken:
+          type: string
+    Database:
+      type: object
+      properties:
+        Name:
+          type: string
+        Description:
+          type: string
+        Parameters:
+          type: object
+          additionalProperties:
+            type: string
     GetDatabaseInput:
       type: object
       required:
@@ -131,15 +140,6 @@ components:
         CatalogName:
           type: string
         DatabaseName:
-          type: string
-    ListDatabasesOutput:
-      type: object
-      properties:
-        DatabaseList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Database'
-        NextToken:
           type: string
   securitySchemes:
     sigv4:

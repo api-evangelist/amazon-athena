@@ -165,34 +165,22 @@ paths:
                     NextToken: ''
 components:
   schemas:
-    DataCatalog:
+    GetDataCatalogInput:
       type: object
+      required:
+      - Name
       properties:
         Name:
           type: string
-        Description:
-          type: string
-        Type:
-          type: string
-          enum:
-          - LAMBDA
-          - GLUE
-          - HIVE
-        Parameters:
-          type: object
-          additionalProperties:
-            type: string
-    DataCatalogSummary:
+    CreateDataCatalogOutput:
+      type: object
+    ListDataCatalogsInput:
       type: object
       properties:
-        CatalogName:
+        NextToken:
           type: string
-        Type:
-          type: string
-          enum:
-          - LAMBDA
-          - GLUE
-          - HIVE
+        MaxResults:
+          type: integer
     ListDataCatalogsOutput:
       type: object
       properties:
@@ -202,13 +190,6 @@ components:
             $ref: '#/components/schemas/DataCatalogSummary'
         NextToken:
           type: string
-    GetDataCatalogOutput:
-      type: object
-      properties:
-        DataCatalog:
-          $ref: '#/components/schemas/DataCatalog'
-    CreateDataCatalogOutput:
-      type: object
     CreateDataCatalogInput:
       type: object
       required:
@@ -235,22 +216,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    ListDataCatalogsInput:
+    DataCatalogSummary:
       type: object
       properties:
-        NextToken:
+        CatalogName:
           type: string
-        MaxResults:
-          type: integer
-    DeleteDataCatalogOutput:
-      type: object
-    DeleteDataCatalogInput:
-      type: object
-      required:
-      - Name
-      properties:
-        Name:
+        Type:
           type: string
+          enum:
+          - LAMBDA
+          - GLUE
+          - HIVE
     Tag:
       type: object
       properties:
@@ -260,7 +236,31 @@ components:
         Value:
           type: string
           description: A tag value
-    GetDataCatalogInput:
+    DataCatalog:
+      type: object
+      properties:
+        Name:
+          type: string
+        Description:
+          type: string
+        Type:
+          type: string
+          enum:
+          - LAMBDA
+          - GLUE
+          - HIVE
+        Parameters:
+          type: object
+          additionalProperties:
+            type: string
+    DeleteDataCatalogOutput:
+      type: object
+    GetDataCatalogOutput:
+      type: object
+      properties:
+        DataCatalog:
+          $ref: '#/components/schemas/DataCatalog'
+    DeleteDataCatalogInput:
       type: object
       required:
       - Name

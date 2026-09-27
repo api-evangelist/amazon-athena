@@ -108,28 +108,37 @@ paths:
                         location: s3://my-bucket/my_table/
 components:
   schemas:
-    ListTableMetadataInput:
+    ListTableMetadataOutput:
+      type: object
+      properties:
+        TableMetadataList:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableMetadata'
+        NextToken:
+          type: string
+    Column:
+      type: object
+      properties:
+        Name:
+          type: string
+        Type:
+          type: string
+        Comment:
+          type: string
+    GetTableMetadataInput:
       type: object
       required:
       - CatalogName
       - DatabaseName
+      - TableName
       properties:
         CatalogName:
           type: string
         DatabaseName:
           type: string
-        Expression:
+        TableName:
           type: string
-          description: A regex filter that pattern-matches table names
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
-    GetTableMetadataOutput:
-      type: object
-      properties:
-        TableMetadata:
-          $ref: '#/components/schemas/TableMetadata'
     TableMetadata:
       type: object
       properties:
@@ -155,37 +164,28 @@ components:
           type: object
           additionalProperties:
             type: string
-    GetTableMetadataInput:
+    GetTableMetadataOutput:
+      type: object
+      properties:
+        TableMetadata:
+          $ref: '#/components/schemas/TableMetadata'
+    ListTableMetadataInput:
       type: object
       required:
       - CatalogName
       - DatabaseName
-      - TableName
       properties:
         CatalogName:
           type: string
         DatabaseName:
           type: string
-        TableName:
+        Expression:
           type: string
-    ListTableMetadataOutput:
-      type: object
-      properties:
-        TableMetadataList:
-          type: array
-          items:
-            $ref: '#/components/schemas/TableMetadata'
+          description: A regex filter that pattern-matches table names
         NextToken:
           type: string
-    Column:
-      type: object
-      properties:
-        Name:
-          type: string
-        Type:
-          type: string
-        Comment:
-          type: string
+        MaxResults:
+          type: integer
   securitySchemes:
     sigv4:
       type: apiKey

@@ -203,6 +203,15 @@ paths:
                     UnprocessedNamedQueryIds: []
 components:
   schemas:
+    ListNamedQueriesInput:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+        WorkGroup:
+          type: string
     ListNamedQueriesOutput:
       type: object
       properties:
@@ -211,6 +220,29 @@ components:
           items:
             type: string
         NextToken:
+          type: string
+    GetNamedQueryInput:
+      type: object
+      required:
+      - NamedQueryId
+      properties:
+        NamedQueryId:
+          type: string
+    BatchGetNamedQueryInput:
+      type: object
+      required:
+      - NamedQueryIds
+      properties:
+        NamedQueryIds:
+          type: array
+          items:
+            type: string
+    DeleteNamedQueryInput:
+      type: object
+      required:
+      - NamedQueryId
+      properties:
+        NamedQueryId:
           type: string
     CreateNamedQueryInput:
       type: object
@@ -236,51 +268,6 @@ components:
         WorkGroup:
           type: string
           description: The name of the workgroup in which the named query is being created
-    GetNamedQueryOutput:
-      type: object
-      properties:
-        NamedQuery:
-          $ref: '#/components/schemas/NamedQuery'
-    NamedQuery:
-      type: object
-      properties:
-        Name:
-          type: string
-        Description:
-          type: string
-        Database:
-          type: string
-        QueryString:
-          type: string
-        NamedQueryId:
-          type: string
-        WorkGroup:
-          type: string
-    DeleteNamedQueryOutput:
-      type: object
-    ListNamedQueriesInput:
-      type: object
-      properties:
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
-        WorkGroup:
-          type: string
-    GetNamedQueryInput:
-      type: object
-      required:
-      - NamedQueryId
-      properties:
-        NamedQueryId:
-          type: string
-    DeleteNamedQueryInput:
-      type: object
-      required:
-      - NamedQueryId
-      properties:
-        NamedQueryId:
-          type: string
     UnprocessedNamedQueryId:
       type: object
       properties:
@@ -301,21 +288,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UnprocessedNamedQueryId'
-    BatchGetNamedQueryInput:
+    GetNamedQueryOutput:
       type: object
-      required:
-      - NamedQueryIds
       properties:
-        NamedQueryIds:
-          type: array
-          items:
-            type: string
+        NamedQuery:
+          $ref: '#/components/schemas/NamedQuery'
     CreateNamedQueryOutput:
       type: object
       properties:
         NamedQueryId:
           type: string
           description: The unique ID of the query
+    DeleteNamedQueryOutput:
+      type: object
+    NamedQuery:
+      type: object
+      properties:
+        Name:
+          type: string
+        Description:
+          type: string
+        Database:
+          type: string
+        QueryString:
+          type: string
+        NamedQueryId:
+          type: string
+        WorkGroup:
+          type: string
   securitySchemes:
     sigv4:
       type: apiKey

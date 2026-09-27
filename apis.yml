@@ -287,7 +287,7 @@ apis:
     url: https://raw.githubusercontent.com/api-evangelist/amazon-athena/refs/heads/main/examples/athena-named-query-example.json
 common:
 - type: Website
-  url: https://amazon.com
+  url: https://aws.amazon.com/athena/
 - type: AgenticAccess
   url: agentic-access/amazon-athena-agentic-access.yml
 - type: VulnerabilityDisclosure
@@ -331,5 +331,5 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
-x-parent: aws
+x-parent: amazon-web-services
 x-relationship: product

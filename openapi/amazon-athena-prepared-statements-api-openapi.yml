@@ -163,77 +163,6 @@ paths:
                     NextToken: ''
 components:
   schemas:
-    DeletePreparedStatementInput:
-      type: object
-      required:
-      - StatementName
-      - WorkGroup
-      properties:
-        StatementName:
-          type: string
-        WorkGroup:
-          type: string
-    CreatePreparedStatementOutput:
-      type: object
-    ListPreparedStatementsInput:
-      type: object
-      required:
-      - WorkGroup
-      properties:
-        WorkGroup:
-          type: string
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
-    PreparedStatementSummary:
-      type: object
-      properties:
-        StatementName:
-          type: string
-        LastModifiedTime:
-          type: string
-          format: date-time
-    GetPreparedStatementOutput:
-      type: object
-      properties:
-        PreparedStatement:
-          $ref: '#/components/schemas/PreparedStatement'
-    DeletePreparedStatementOutput:
-      type: object
-    ListPreparedStatementsOutput:
-      type: object
-      properties:
-        PreparedStatements:
-          type: array
-          items:
-            $ref: '#/components/schemas/PreparedStatementSummary'
-        NextToken:
-          type: string
-    GetPreparedStatementInput:
-      type: object
-      required:
-      - StatementName
-      - WorkGroup
-      properties:
-        StatementName:
-          type: string
-        WorkGroup:
-          type: string
-    PreparedStatement:
-      type: object
-      properties:
-        StatementName:
-          type: string
-        QueryStatement:
-          type: string
-        WorkGroupName:
-          type: string
-        Description:
-          type: string
-        LastModifiedTime:
-          type: string
-          format: date-time
     CreatePreparedStatementInput:
       type: object
       required:
@@ -251,6 +180,77 @@ components:
           type: string
           description: The query string for the prepared statement
         Description:
+          type: string
+    ListPreparedStatementsInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    DeletePreparedStatementOutput:
+      type: object
+    GetPreparedStatementInput:
+      type: object
+      required:
+      - StatementName
+      - WorkGroup
+      properties:
+        StatementName:
+          type: string
+        WorkGroup:
+          type: string
+    PreparedStatementSummary:
+      type: object
+      properties:
+        StatementName:
+          type: string
+        LastModifiedTime:
+          type: string
+          format: date-time
+    ListPreparedStatementsOutput:
+      type: object
+      properties:
+        PreparedStatements:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreparedStatementSummary'
+        NextToken:
+          type: string
+    PreparedStatement:
+      type: object
+      properties:
+        StatementName:
+          type: string
+        QueryStatement:
+          type: string
+        WorkGroupName:
+          type: string
+        Description:
+          type: string
+        LastModifiedTime:
+          type: string
+          format: date-time
+    GetPreparedStatementOutput:
+      type: object
+      properties:
+        PreparedStatement:
+          $ref: '#/components/schemas/PreparedStatement'
+    CreatePreparedStatementOutput:
+      type: object
+    DeletePreparedStatementInput:
+      type: object
+      required:
+      - StatementName
+      - WorkGroup
+      properties:
+        StatementName:
+          type: string
+        WorkGroup:
           type: string
   securitySchemes:
     sigv4:

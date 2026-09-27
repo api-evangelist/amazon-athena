@@ -125,6 +125,19 @@ paths:
                     NextToken: ''
 components:
   schemas:
+    TagResourceInput:
+      type: object
+      required:
+      - ResourceARN
+      - Tags
+      properties:
+        ResourceARN:
+          type: string
+          description: Specifies the ARN of the Athena resource to which tags are to be added
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
     TagResourceOutput:
       type: object
     UntagResourceInput:
@@ -150,28 +163,6 @@ components:
           type: string
         MaxResults:
           type: integer
-    TagResourceInput:
-      type: object
-      required:
-      - ResourceARN
-      - Tags
-      properties:
-        ResourceARN:
-          type: string
-          description: Specifies the ARN of the Athena resource to which tags are to be added
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-    ListTagsForResourceOutput:
-      type: object
-      properties:
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        NextToken:
-          type: string
     UntagResourceOutput:
       type: object
     Tag:
@@ -183,6 +174,15 @@ components:
         Value:
           type: string
           description: A tag value
+    ListTagsForResourceOutput:
+      type: object
+      properties:
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        NextToken:
+          type: string
   securitySchemes:
     sigv4:
       type: apiKey

@@ -165,22 +165,24 @@ paths:
                     NextToken: ''
 components:
   schemas:
-    GetDataCatalogInput:
+    Tag:
+      type: object
+      properties:
+        Key:
+          type: string
+          description: A tag key
+        Value:
+          type: string
+          description: A tag value
+    CreateDataCatalogOutput:
+      type: object
+    DeleteDataCatalogInput:
       type: object
       required:
       - Name
       properties:
         Name:
           type: string
-    CreateDataCatalogOutput:
-      type: object
-    ListDataCatalogsInput:
-      type: object
-      properties:
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
     ListDataCatalogsOutput:
       type: object
       properties:
@@ -190,6 +192,31 @@ components:
             $ref: '#/components/schemas/DataCatalogSummary'
         NextToken:
           type: string
+    GetDataCatalogInput:
+      type: object
+      required:
+      - Name
+      properties:
+        Name:
+          type: string
+    GetDataCatalogOutput:
+      type: object
+      properties:
+        DataCatalog:
+          $ref: '#/components/schemas/DataCatalog'
+    DeleteDataCatalogOutput:
+      type: object
+    DataCatalogSummary:
+      type: object
+      properties:
+        CatalogName:
+          type: string
+        Type:
+          type: string
+          enum:
+          - LAMBDA
+          - GLUE
+          - HIVE
     CreateDataCatalogInput:
       type: object
       required:
@@ -216,26 +243,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    DataCatalogSummary:
-      type: object
-      properties:
-        CatalogName:
-          type: string
-        Type:
-          type: string
-          enum:
-          - LAMBDA
-          - GLUE
-          - HIVE
-    Tag:
-      type: object
-      properties:
-        Key:
-          type: string
-          description: A tag key
-        Value:
-          type: string
-          description: A tag value
     DataCatalog:
       type: object
       properties:
@@ -253,20 +260,13 @@ components:
           type: object
           additionalProperties:
             type: string
-    DeleteDataCatalogOutput:
-      type: object
-    GetDataCatalogOutput:
+    ListDataCatalogsInput:
       type: object
       properties:
-        DataCatalog:
-          $ref: '#/components/schemas/DataCatalog'
-    DeleteDataCatalogInput:
-      type: object
-      required:
-      - Name
-      properties:
-        Name:
+        NextToken:
           type: string
+        MaxResults:
+          type: integer
   securitySchemes:
     sigv4:
       type: apiKey

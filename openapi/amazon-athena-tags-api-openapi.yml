@@ -125,38 +125,6 @@ paths:
                     NextToken: ''
 components:
   schemas:
-    UntagResourceInput:
-      type: object
-      required:
-      - ResourceARN
-      - TagKeys
-      properties:
-        ResourceARN:
-          type: string
-        TagKeys:
-          type: array
-          items:
-            type: string
-    Tag:
-      type: object
-      properties:
-        Key:
-          type: string
-          description: A tag key
-        Value:
-          type: string
-          description: A tag value
-    ListTagsForResourceInput:
-      type: object
-      required:
-      - ResourceARN
-      properties:
-        ResourceARN:
-          type: string
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
     UntagResourceOutput:
       type: object
     ListTagsForResourceOutput:
@@ -168,8 +136,26 @@ components:
             $ref: '#/components/schemas/Tag'
         NextToken:
           type: string
-    TagResourceOutput:
+    ListTagsForResourceInput:
       type: object
+      required:
+      - ResourceARN
+      properties:
+        ResourceARN:
+          type: string
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    Tag:
+      type: object
+      properties:
+        Key:
+          type: string
+          description: A tag key
+        Value:
+          type: string
+          description: A tag value
     TagResourceInput:
       type: object
       required:
@@ -183,6 +169,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    UntagResourceInput:
+      type: object
+      required:
+      - ResourceARN
+      - TagKeys
+      properties:
+        ResourceARN:
+          type: string
+        TagKeys:
+          type: array
+          items:
+            type: string
+    TagResourceOutput:
+      type: object
   securitySchemes:
     sigv4:
       type: apiKey

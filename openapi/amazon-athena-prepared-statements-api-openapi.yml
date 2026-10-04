@@ -179,6 +179,61 @@ components:
       properties:
         PreparedStatement:
           $ref: '#/components/schemas/PreparedStatement'
+    ListPreparedStatementsInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    PreparedStatementSummary:
+      type: object
+      properties:
+        StatementName:
+          type: string
+        LastModifiedTime:
+          type: string
+          format: date-time
+    DeletePreparedStatementInput:
+      type: object
+      required:
+      - StatementName
+      - WorkGroup
+      properties:
+        StatementName:
+          type: string
+        WorkGroup:
+          type: string
+    CreatePreparedStatementOutput:
+      type: object
+    GetPreparedStatementInput:
+      type: object
+      required:
+      - StatementName
+      - WorkGroup
+      properties:
+        StatementName:
+          type: string
+        WorkGroup:
+          type: string
+    PreparedStatement:
+      type: object
+      properties:
+        StatementName:
+          type: string
+        QueryStatement:
+          type: string
+        WorkGroupName:
+          type: string
+        Description:
+          type: string
+        LastModifiedTime:
+          type: string
+          format: date-time
     CreatePreparedStatementInput:
       type: object
       required:
@@ -197,61 +252,6 @@ components:
           description: The query string for the prepared statement
         Description:
           type: string
-    PreparedStatementSummary:
-      type: object
-      properties:
-        StatementName:
-          type: string
-        LastModifiedTime:
-          type: string
-          format: date-time
-    PreparedStatement:
-      type: object
-      properties:
-        StatementName:
-          type: string
-        QueryStatement:
-          type: string
-        WorkGroupName:
-          type: string
-        Description:
-          type: string
-        LastModifiedTime:
-          type: string
-          format: date-time
-    DeletePreparedStatementInput:
-      type: object
-      required:
-      - StatementName
-      - WorkGroup
-      properties:
-        StatementName:
-          type: string
-        WorkGroup:
-          type: string
-    GetPreparedStatementInput:
-      type: object
-      required:
-      - StatementName
-      - WorkGroup
-      properties:
-        StatementName:
-          type: string
-        WorkGroup:
-          type: string
-    CreatePreparedStatementOutput:
-      type: object
-    ListPreparedStatementsInput:
-      type: object
-      required:
-      - WorkGroup
-      properties:
-        WorkGroup:
-          type: string
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
   securitySchemes:
     sigv4:
       type: apiKey

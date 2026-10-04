@@ -205,6 +205,96 @@ paths:
                     NextToken: ''
 components:
   schemas:
+    DeleteWorkGroupInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+        RecursiveDeleteOption:
+          type: boolean
+          description: The option to delete the workgroup and its contents even if the workgroup contains any named queries or query executions
+    CreateWorkGroupOutput:
+      type: object
+    UpdateWorkGroupInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+        Description:
+          type: string
+        ConfigurationUpdates:
+          $ref: '#/components/schemas/WorkGroupConfigurationUpdates'
+        State:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+    EngineVersion:
+      type: object
+      properties:
+        SelectedEngineVersion:
+          type: string
+          description: The engine version requested by the user
+        EffectiveEngineVersion:
+          type: string
+          description: The engine version on which the query runs
+    UpdateWorkGroupOutput:
+      type: object
+    GetWorkGroupOutput:
+      type: object
+      properties:
+        WorkGroup:
+          $ref: '#/components/schemas/WorkGroup'
+    ListWorkGroupsOutput:
+      type: object
+      properties:
+        WorkGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkGroupSummary'
+        NextToken:
+          type: string
+    WorkGroupConfiguration:
+      type: object
+      properties:
+        ResultConfiguration:
+          $ref: '#/components/schemas/ResultConfiguration'
+        EnforceWorkGroupConfiguration:
+          type: boolean
+        PublishCloudWatchMetricsEnabled:
+          type: boolean
+        BytesScannedCutoffPerQuery:
+          type: integer
+        RequesterPaysEnabled:
+          type: boolean
+        EngineVersion:
+          $ref: '#/components/schemas/EngineVersion'
+    ListWorkGroupsInput:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    ResultConfigurationUpdates:
+      type: object
+      properties:
+        OutputLocation:
+          type: string
+        RemoveOutputLocation:
+          type: boolean
+        EncryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+        RemoveEncryptionConfiguration:
+          type: boolean
+        ExpectedBucketOwner:
+          type: string
+        RemoveExpectedBucketOwner:
+          type: boolean
     WorkGroup:
       type: object
       properties:
@@ -222,32 +312,68 @@ components:
         CreationTime:
           type: string
           format: date-time
-    ResultConfigurationUpdates:
+    WorkGroupSummary:
+      type: object
+      properties:
+        Name:
+          type: string
+        State:
+          type: string
+        Description:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        EngineVersion:
+          $ref: '#/components/schemas/EngineVersion'
+    DeleteWorkGroupOutput:
+      type: object
+    ResultConfiguration:
       type: object
       properties:
         OutputLocation:
           type: string
-        RemoveOutputLocation:
-          type: boolean
+          description: The location in Amazon S3 where your query results are stored
         EncryptionConfiguration:
           $ref: '#/components/schemas/EncryptionConfiguration'
-        RemoveEncryptionConfiguration:
-          type: boolean
         ExpectedBucketOwner:
           type: string
-        RemoveExpectedBucketOwner:
-          type: boolean
-    EngineVersion:
+    Tag:
       type: object
       properties:
-        SelectedEngineVersion:
+        Key:
           type: string
-          description: The engine version requested by the user
-        EffectiveEngineVersion:
+          description: A tag key
+        Value:
           type: string
-          description: The engine version on which the query runs
-    CreateWorkGroupOutput:
+          description: A tag value
+    CreateWorkGroupInput:
       type: object
+      required:
+      - Name
+      properties:
+        Name:
+          type: string
+          description: The workgroup name
+        Configuration:
+          $ref: '#/components/schemas/WorkGroupConfiguration'
+        Description:
+          type: string
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    EncryptionConfiguration:
+      type: object
+      properties:
+        EncryptionOption:
+          type: string
+          enum:
+          - SSE_S3
+          - SSE_KMS
+          - CSE_KMS
+        KmsKey:
+          type: string
     WorkGroupConfigurationUpdates:
       type: object
       properties:
@@ -265,8 +391,6 @@ components:
           type: boolean
         EngineVersion:
           $ref: '#/components/schemas/EngineVersion'
-    UpdateWorkGroupOutput:
-      type: object
     GetWorkGroupInput:
       type: object
       required:
@@ -274,130 +398,6 @@ components:
       properties:
         WorkGroup:
           type: string
-    WorkGroupSummary:
-      type: object
-      properties:
-        Name:
-          type: string
-        State:
-          type: string
-        Description:
-          type: string
-        CreationTime:
-          type: string
-          format: date-time
-        EngineVersion:
-          $ref: '#/components/schemas/EngineVersion'
-    Tag:
-      type: object
-      properties:
-        Key:
-          type: string
-          description: A tag key
-        Value:
-          type: string
-          description: A tag value
-    ListWorkGroupsOutput:
-      type: object
-      properties:
-        WorkGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkGroupSummary'
-        NextToken:
-          type: string
-    UpdateWorkGroupInput:
-      type: object
-      required:
-      - WorkGroup
-      properties:
-        WorkGroup:
-          type: string
-        Description:
-          type: string
-        ConfigurationUpdates:
-          $ref: '#/components/schemas/WorkGroupConfigurationUpdates'
-        State:
-          type: string
-          enum:
-          - ENABLED
-          - DISABLED
-    DeleteWorkGroupInput:
-      type: object
-      required:
-      - WorkGroup
-      properties:
-        WorkGroup:
-          type: string
-        RecursiveDeleteOption:
-          type: boolean
-          description: The option to delete the workgroup and its contents even if the workgroup contains any named queries or query executions
-    ResultConfiguration:
-      type: object
-      properties:
-        OutputLocation:
-          type: string
-          description: The location in Amazon S3 where your query results are stored
-        EncryptionConfiguration:
-          $ref: '#/components/schemas/EncryptionConfiguration'
-        ExpectedBucketOwner:
-          type: string
-    CreateWorkGroupInput:
-      type: object
-      required:
-      - Name
-      properties:
-        Name:
-          type: string
-          description: The workgroup name
-        Configuration:
-          $ref: '#/components/schemas/WorkGroupConfiguration'
-        Description:
-          type: string
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-    ListWorkGroupsInput:
-      type: object
-      properties:
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
-    DeleteWorkGroupOutput:
-      type: object
-    GetWorkGroupOutput:
-      type: object
-      properties:
-        WorkGroup:
-          $ref: '#/components/schemas/WorkGroup'
-    EncryptionConfiguration:
-      type: object
-      properties:
-        EncryptionOption:
-          type: string
-          enum:
-          - SSE_S3
-          - SSE_KMS
-          - CSE_KMS
-        KmsKey:
-          type: string
-    WorkGroupConfiguration:
-      type: object
-      properties:
-        ResultConfiguration:
-          $ref: '#/components/schemas/ResultConfiguration'
-        EnforceWorkGroupConfiguration:
-          type: boolean
-        PublishCloudWatchMetricsEnabled:
-          type: boolean
-        BytesScannedCutoffPerQuery:
-          type: integer
-        RequesterPaysEnabled:
-          type: boolean
-        EngineVersion:
-          $ref: '#/components/schemas/EngineVersion'
   securitySchemes:
     sigv4:
       type: apiKey

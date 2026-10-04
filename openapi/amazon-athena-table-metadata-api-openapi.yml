@@ -108,36 +108,6 @@ paths:
                         location: s3://my-bucket/my_table/
 components:
   schemas:
-    GetTableMetadataOutput:
-      type: object
-      properties:
-        TableMetadata:
-          $ref: '#/components/schemas/TableMetadata'
-    TableMetadata:
-      type: object
-      properties:
-        Name:
-          type: string
-        CreateTime:
-          type: string
-          format: date-time
-        LastAccessTime:
-          type: string
-          format: date-time
-        TableType:
-          type: string
-        Columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/Column'
-        PartitionKeys:
-          type: array
-          items:
-            $ref: '#/components/schemas/Column'
-        Parameters:
-          type: object
-          additionalProperties:
-            type: string
     ListTableMetadataOutput:
       type: object
       properties:
@@ -186,6 +156,36 @@ components:
           type: string
         Comment:
           type: string
+    GetTableMetadataOutput:
+      type: object
+      properties:
+        TableMetadata:
+          $ref: '#/components/schemas/TableMetadata'
+    TableMetadata:
+      type: object
+      properties:
+        Name:
+          type: string
+        CreateTime:
+          type: string
+          format: date-time
+        LastAccessTime:
+          type: string
+          format: date-time
+        TableType:
+          type: string
+        Columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Column'
+        PartitionKeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Column'
+        Parameters:
+          type: object
+          additionalProperties:
+            type: string
   securitySchemes:
     sigv4:
       type: apiKey

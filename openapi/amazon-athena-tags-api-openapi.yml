@@ -125,8 +125,18 @@ paths:
                     NextToken: ''
 components:
   schemas:
-    UntagResourceOutput:
+    UntagResourceInput:
       type: object
+      required:
+      - ResourceARN
+      - TagKeys
+      properties:
+        ResourceARN:
+          type: string
+        TagKeys:
+          type: array
+          items:
+            type: string
     ListTagsForResourceOutput:
       type: object
       properties:
@@ -136,6 +146,8 @@ components:
             $ref: '#/components/schemas/Tag'
         NextToken:
           type: string
+    UntagResourceOutput:
+      type: object
     ListTagsForResourceInput:
       type: object
       required:
@@ -147,15 +159,6 @@ components:
           type: string
         MaxResults:
           type: integer
-    Tag:
-      type: object
-      properties:
-        Key:
-          type: string
-          description: A tag key
-        Value:
-          type: string
-          description: A tag value
     TagResourceInput:
       type: object
       required:
@@ -169,18 +172,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    UntagResourceInput:
+    Tag:
       type: object
-      required:
-      - ResourceARN
-      - TagKeys
       properties:
-        ResourceARN:
+        Key:
           type: string
-        TagKeys:
-          type: array
-          items:
-            type: string
+          description: A tag key
+        Value:
+          type: string
+          description: A tag value
     TagResourceOutput:
       type: object
   securitySchemes:

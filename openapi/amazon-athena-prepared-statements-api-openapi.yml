@@ -163,41 +163,8 @@ paths:
                     NextToken: ''
 components:
   schemas:
-    ListPreparedStatementsOutput:
-      type: object
-      properties:
-        PreparedStatements:
-          type: array
-          items:
-            $ref: '#/components/schemas/PreparedStatementSummary'
-        NextToken:
-          type: string
     DeletePreparedStatementOutput:
       type: object
-    GetPreparedStatementOutput:
-      type: object
-      properties:
-        PreparedStatement:
-          $ref: '#/components/schemas/PreparedStatement'
-    ListPreparedStatementsInput:
-      type: object
-      required:
-      - WorkGroup
-      properties:
-        WorkGroup:
-          type: string
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
-    PreparedStatementSummary:
-      type: object
-      properties:
-        StatementName:
-          type: string
-        LastModifiedTime:
-          type: string
-          format: date-time
     DeletePreparedStatementInput:
       type: object
       required:
@@ -208,8 +175,6 @@ components:
           type: string
         WorkGroup:
           type: string
-    CreatePreparedStatementOutput:
-      type: object
     GetPreparedStatementInput:
       type: object
       required:
@@ -220,20 +185,23 @@ components:
           type: string
         WorkGroup:
           type: string
-    PreparedStatement:
+    PreparedStatementSummary:
       type: object
       properties:
         StatementName:
           type: string
-        QueryStatement:
-          type: string
-        WorkGroupName:
-          type: string
-        Description:
-          type: string
         LastModifiedTime:
           type: string
           format: date-time
+    ListPreparedStatementsOutput:
+      type: object
+      properties:
+        PreparedStatements:
+          type: array
+          items:
+            $ref: '#/components/schemas/PreparedStatementSummary'
+        NextToken:
+          type: string
     CreatePreparedStatementInput:
       type: object
       required:
@@ -252,6 +220,38 @@ components:
           description: The query string for the prepared statement
         Description:
           type: string
+    ListPreparedStatementsInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
+    GetPreparedStatementOutput:
+      type: object
+      properties:
+        PreparedStatement:
+          $ref: '#/components/schemas/PreparedStatement'
+    PreparedStatement:
+      type: object
+      properties:
+        StatementName:
+          type: string
+        QueryStatement:
+          type: string
+        WorkGroupName:
+          type: string
+        Description:
+          type: string
+        LastModifiedTime:
+          type: string
+          format: date-time
+    CreatePreparedStatementOutput:
+      type: object
   securitySchemes:
     sigv4:
       type: apiKey

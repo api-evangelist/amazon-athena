@@ -95,17 +95,6 @@ paths:
                         classification: parquet
 components:
   schemas:
-    ListDatabasesInput:
-      type: object
-      required:
-      - CatalogName
-      properties:
-        CatalogName:
-          type: string
-        NextToken:
-          type: string
-        MaxResults:
-          type: integer
     GetDatabaseOutput:
       type: object
       properties:
@@ -141,6 +130,17 @@ components:
           type: string
         DatabaseName:
           type: string
+    ListDatabasesInput:
+      type: object
+      required:
+      - CatalogName
+      properties:
+        CatalogName:
+          type: string
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
   securitySchemes:
     sigv4:
       type: apiKey

@@ -205,34 +205,12 @@ paths:
                     NextToken: ''
 components:
   schemas:
-    DeleteWorkGroupInput:
+    UpdateWorkGroupOutput:
       type: object
-      required:
-      - WorkGroup
-      properties:
-        WorkGroup:
-          type: string
-        RecursiveDeleteOption:
-          type: boolean
-          description: The option to delete the workgroup and its contents even if the workgroup contains any named queries or query executions
+    DeleteWorkGroupOutput:
+      type: object
     CreateWorkGroupOutput:
       type: object
-    UpdateWorkGroupInput:
-      type: object
-      required:
-      - WorkGroup
-      properties:
-        WorkGroup:
-          type: string
-        Description:
-          type: string
-        ConfigurationUpdates:
-          $ref: '#/components/schemas/WorkGroupConfigurationUpdates'
-        State:
-          type: string
-          enum:
-          - ENABLED
-          - DISABLED
     EngineVersion:
       type: object
       properties:
@@ -242,22 +220,6 @@ components:
         EffectiveEngineVersion:
           type: string
           description: The engine version on which the query runs
-    UpdateWorkGroupOutput:
-      type: object
-    GetWorkGroupOutput:
-      type: object
-      properties:
-        WorkGroup:
-          $ref: '#/components/schemas/WorkGroup'
-    ListWorkGroupsOutput:
-      type: object
-      properties:
-        WorkGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkGroupSummary'
-        NextToken:
-          type: string
     WorkGroupConfiguration:
       type: object
       properties:
@@ -273,28 +235,32 @@ components:
           type: boolean
         EngineVersion:
           $ref: '#/components/schemas/EngineVersion'
-    ListWorkGroupsInput:
+    WorkGroupSummary:
       type: object
       properties:
-        NextToken:
+        Name:
           type: string
-        MaxResults:
-          type: integer
-    ResultConfigurationUpdates:
+        State:
+          type: string
+        Description:
+          type: string
+        CreationTime:
+          type: string
+          format: date-time
+        EngineVersion:
+          $ref: '#/components/schemas/EngineVersion'
+    GetWorkGroupInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
+          type: string
+    GetWorkGroupOutput:
       type: object
       properties:
-        OutputLocation:
-          type: string
-        RemoveOutputLocation:
-          type: boolean
-        EncryptionConfiguration:
-          $ref: '#/components/schemas/EncryptionConfiguration'
-        RemoveEncryptionConfiguration:
-          type: boolean
-        ExpectedBucketOwner:
-          type: string
-        RemoveExpectedBucketOwner:
-          type: boolean
+        WorkGroup:
+          $ref: '#/components/schemas/WorkGroup'
     WorkGroup:
       type: object
       properties:
@@ -312,32 +278,52 @@ components:
         CreationTime:
           type: string
           format: date-time
-    WorkGroupSummary:
+    EncryptionConfiguration:
       type: object
       properties:
-        Name:
+        EncryptionOption:
           type: string
-        State:
+          enum:
+          - SSE_S3
+          - SSE_KMS
+          - CSE_KMS
+        KmsKey:
+          type: string
+    ListWorkGroupsOutput:
+      type: object
+      properties:
+        WorkGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkGroupSummary'
+        NextToken:
+          type: string
+    UpdateWorkGroupInput:
+      type: object
+      required:
+      - WorkGroup
+      properties:
+        WorkGroup:
           type: string
         Description:
           type: string
-        CreationTime:
+        ConfigurationUpdates:
+          $ref: '#/components/schemas/WorkGroupConfigurationUpdates'
+        State:
           type: string
-          format: date-time
-        EngineVersion:
-          $ref: '#/components/schemas/EngineVersion'
-    DeleteWorkGroupOutput:
+          enum:
+          - ENABLED
+          - DISABLED
+    DeleteWorkGroupInput:
       type: object
-    ResultConfiguration:
-      type: object
+      required:
+      - WorkGroup
       properties:
-        OutputLocation:
+        WorkGroup:
           type: string
-          description: The location in Amazon S3 where your query results are stored
-        EncryptionConfiguration:
-          $ref: '#/components/schemas/EncryptionConfiguration'
-        ExpectedBucketOwner:
-          type: string
+        RecursiveDeleteOption:
+          type: boolean
+          description: The option to delete the workgroup and its contents even if the workgroup contains any named queries or query executions
     Tag:
       type: object
       properties:
@@ -363,17 +349,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    EncryptionConfiguration:
+    ResultConfigurationUpdates:
       type: object
       properties:
-        EncryptionOption:
+        OutputLocation:
           type: string
-          enum:
-          - SSE_S3
-          - SSE_KMS
-          - CSE_KMS
-        KmsKey:
+        RemoveOutputLocation:
+          type: boolean
+        EncryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+        RemoveEncryptionConfiguration:
+          type: boolean
+        ExpectedBucketOwner:
           type: string
+        RemoveExpectedBucketOwner:
+          type: boolean
     WorkGroupConfigurationUpdates:
       type: object
       properties:
@@ -391,13 +381,23 @@ components:
           type: boolean
         EngineVersion:
           $ref: '#/components/schemas/EngineVersion'
-    GetWorkGroupInput:
+    ResultConfiguration:
       type: object
-      required:
-      - WorkGroup
       properties:
-        WorkGroup:
+        OutputLocation:
           type: string
+          description: The location in Amazon S3 where your query results are stored
+        EncryptionConfiguration:
+          $ref: '#/components/schemas/EncryptionConfiguration'
+        ExpectedBucketOwner:
+          type: string
+    ListWorkGroupsInput:
+      type: object
+      properties:
+        NextToken:
+          type: string
+        MaxResults:
+          type: integer
   securitySchemes:
     sigv4:
       type: apiKey

@@ -18,7 +18,39 @@ edges:
       status: released
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: Meltano
+  partner: meltano
+  partner_match: aggregator
+  type: marketplace
+  marketplace: meltano-hub
+  channel: elt-connector
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://hub.meltano.com/extractors/tap-athena--meltanolabs
+  category: null
+  contract_reference:
+    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
+    spec_file: null
+    role: elt-connector:meltano-hub
+    registered_name: Athena
+    matched_domain: amazon.com
+    matched_by: domain+name-among-holders
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    plugins:
+    - tap-athena--meltanolabs
+    - target-athena--meltanolabs
+    maintenance_status:
+    - active
+    quality:
+    - gold
+    - silver
+    builder: 'community (Meltano Hub variant maintainers: meltanolabs)'
+  detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
 method: searched
 checked:
+- https://github.com/meltano/hub
 - https://hightouch.com/docs/sources/amazon-athena
 source: https://hightouch.com/docs/sources/amazon-athena
